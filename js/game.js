@@ -1,11 +1,12 @@
 let canvas;
-let ctx;
-let character = new Image()
+let world;
 
 function init() {
     canvas = document.getElementById('canvas');
-    ctx = canvas.getContext('2d');
-    character.src = '../img/1.Sharkie/3.Swim/1.png'
+    world = new World(canvas);
 
-    ctx.drawImage(character,20 ,20 , 50 ,150) 
+    
+
+    console.log('My char is:', world.character )
+    console.log('My enemy is:', world.enemies )
 }
