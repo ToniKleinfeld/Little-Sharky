@@ -1,7 +1,7 @@
 class Character extends MoveableObject{
 
-    x = 10;
-    y = 200;
+    x;
+    y;
     height = 170;
     width = 200;
 
@@ -19,20 +19,24 @@ class Character extends MoveableObject{
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png')
         this.loadImages(this.IMAGES_SWIM);
-
+        this.x = 10;
+        this.y = 200;
+        this.speed = this.speed * 12
         this.animate();
     }
 
     animate() {
         setInterval(() => {
             if (this.world.keyboard.right) {
-                this.x += this.speed * 12;
+                this.x += this.speed;
+                this.otherDirection = false;
             } else if (this.world.keyboard.left) {
-                this.x -= this.speed * 12;
+                this.x -= this.speed;
+                this.otherDirection = true;
             } else if (this.world.keyboard.top) {
-                this.y -= this.speed * 12;
+                this.y -= this.speed;
             } else if (this.world.keyboard.down) {
-                this.y += this.speed * 12;
+                this.y += this.speed;
             } 
 
 
