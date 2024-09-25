@@ -6,6 +6,8 @@ class World {
         new Enemy(),
     ];
     ctx;
+    canvas;
+    keyboard;
 
     backgroundObjects = [ 
         new BackgroundObject('img/3. Background/Legacy/Layers/5. Water/d1.png', 0 ,0),
@@ -15,11 +17,17 @@ class World {
         new BackgroundObject('img/3. Background/Legacy/Layers/2. Floor/D1.png', 0 ,0)
     ]
 
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
     };
+
+    setWorld() {
+        this.character.world = this
+    }
 
     draw() {
         this.ctx.clearRect(0,0, this.canvas.width , this.canvas.height);
