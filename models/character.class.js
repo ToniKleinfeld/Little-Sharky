@@ -14,6 +14,8 @@ class Character extends MoveableObject{
             'img/1.Sharkie/3.Swim/6.png'
         ];
     world;
+
+    swim_sound = new Audio('audio/swim.mp3')
     
 
     constructor() {
@@ -21,40 +23,45 @@ class Character extends MoveableObject{
         this.loadImages(this.IMAGES_SWIM);
         this.x = 10;
         this.y = 200;
-        this.speed = this.speed * 12
+        this.speed = this.speed * 120
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            if (this.world.keyboard.right) {
+            
+            if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390) {
                 this.x += this.speed;
                 this.otherDirection = false;
-            } else if (this.world.keyboard.left) {
+                this.swim_sound.play();
+            } else if (this.world.keyboard.left && this.x > -680) {
                 this.x -= this.speed;
                 this.otherDirection = true;
-            } else if (this.world.keyboard.top) {
+                this.swim_sound.play();
+            } else if (this.world.keyboard.top && this.y > -70) {
                 this.y -= this.speed;
-            } else if (this.world.keyboard.down) {
+                this.swim_sound.play();
+            } else if (this.world.keyboard.down && this.y < 330) {
                 this.y += this.speed;
-            } 
+                this.swim_sound.play();
+            } else {
+                this.swim_sound.pause()
+            }
+            if (this.x > this.world.level.level_end_x) {
+                
+            } else if (this.x < -590) {
+                
+            } else {
+                this.world.camera_x = -this.x +110;
+            }
 
-
-
-            
         }, 1000 / 60);
 
         setInterval(() => { 
             if (this.world.keyboard.right || this.world.keyboard.left || this.world.keyboard.top || this.world.keyboard.down) {
-
-                let i = this.currentImage % this.IMAGES_SWIM.length;
-                let path = this.IMAGES_SWIM[i];
-                this.img = this.imageCache[path];
-                this.currentImage++
+                this.playAnimation(this.IMAGES_SWIM);
             }
-
-        }, 250);
-
+        }, 250);    
     }
 
     jump() {

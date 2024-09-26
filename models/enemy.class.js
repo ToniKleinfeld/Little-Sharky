@@ -2,6 +2,7 @@ class Enemy extends MoveableObject {
 
     height = 80;
     width = 90;
+    currentImage = 0;
     
 
     IMAGES_SWIM = [
@@ -21,19 +22,17 @@ class Enemy extends MoveableObject {
         this.y = Math.random() * 405;
         this.speed = 0.15 + Math.random() * 0.25;
 
-        this.animate();
-        this.swimLeft() 
+        this.swimLeft();
+        this.animate();        
+        
     }
 
     animate() {
-        setInterval(() => {
-            let i = this.currentImage % this.IMAGES_SWIM.length;
-            let path = this.IMAGES_SWIM[i];
-            this.img = this.imageCache[path];
-            this.currentImage++
-        }, 250);
-
-        this.swimLeft()
+        setInterval(() => { 
+            this.playAnimation(this.IMAGES_SWIM);
+        }, 250);   
     }
+
+
 
 }
