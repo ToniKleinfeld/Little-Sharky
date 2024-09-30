@@ -38,7 +38,7 @@ class Character extends MoveableObject{
         this.loadImages(this.IMAGES_ATTACK_FIN);
         this.x = 10;
         this.y = 200;
-        this.speed = this.speed * 140;
+        this.speed = this.speed * 80;
         // this.applyGravity();
         this.animate();
     }
@@ -47,19 +47,13 @@ class Character extends MoveableObject{
         setInterval(() => {
 
              if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space) {
-                 this.x += this.speed;
-                 this.otherDirection = false;
-                 this.swim_sound.play();
+                this.swimRight();
              } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space) {
-                 this.x -= this.speed;
-                 this.otherDirection = true;
-                 this.swim_sound.play();
+                this.swimLeft();
              } else if (this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space) {
-                 this.y -= this.speed;
-                 this.swim_sound.play();
+                this.swimTop(); 
              } else if (this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space) {
-                 this.y += this.speed;
-                 this.swim_sound.play();
+                this.swimDown();
             } else {
                  this.swim_sound.pause()
             }   
@@ -72,26 +66,56 @@ class Character extends MoveableObject{
 
         }, 1000 / 60);
 
+
         setInterval(() => {    
             if (this.world.keyboard.space) { 
+                this.finAttack();
+            } 
+        }, 60); 
 
-                this.playAttackAnimation(this.IMAGES_ATTACK_FIN)
-                this.count++  
-
-                if (this.count == this.IMAGES_ATTACK_FIN.length ) {                    
-                    this.world.keyboard.space = false;
-                    this.count = 0;                                        
-                }  
-            } else if (!this.world.keyboard.space && this.count == 0) {
-
-                if (this.world.keyboard.right || this.world.keyboard.left || this.world.keyboard.top || this.world.keyboard.down) {
-                    this.playAnimation(this.IMAGES_SWIM);
-                } 
+        setInterval(() => {    
+         if (!this.world.keyboard.space && this.count == 0) {
+                this.swimAnimation();
             }  
-        }, 50);    
+        }, 250);    
+        
     }
 
-    attack() {
+    finAttack() {
+        this.playAttackAnimation(this.IMAGES_ATTACK_FIN)         
+        this.count++  
 
+        if (this.count == this.IMAGES_ATTACK_FIN.length ) {                    
+            this.world.keyboard.space = false;
+            this.count = 0;                                                   
+        }  
+    }
+
+    swimAnimation() {
+        if (this.world.keyboard.right || this.world.keyboard.left || this.world.keyboard.top || this.world.keyboard.down) {
+            this.playAnimation(this.IMAGES_SWIM);
+        }; 
+    };
+
+    swimRight(){
+        this.x += this.speed;
+        this.otherDirection = false;
+        this.swim_sound.play();
+    };
+
+    swimLeft(){
+        this.x -= this.speed;
+        this.otherDirection = true;
+        this.swim_sound.play();
+    };
+
+    swimTop() {
+        this.y -= this.speed;
+        this.swim_sound.play();
+    }
+
+    swimDown() {
+        this.y += this.speed;
+        this.swim_sound.play();
     }
 }

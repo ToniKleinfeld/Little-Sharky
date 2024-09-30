@@ -9,10 +9,10 @@ class Light extends MoveableObject {
         this.x = x;
         this.y = y;
 
-        this.swimLeft();
+        this.moveLeft();
     }
 
-    swimLeft() {
+    moveLeft() {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);        
