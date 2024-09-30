@@ -8,6 +8,22 @@ class MoveableObject {
     currentImage = 0;
     speed = 0.15;
     otherDirection = false;
+    // speedY = 0;
+    // acceleration = 1;
+
+    // applyGravity(){
+    //     setInterval(() => {
+    //         if (this.isAboveGround() || this.speedY > 0) {
+    //             this.y -= this.speedY;
+    //             this.speedx -= this.acceleration;
+    //         }
+    //     }, 1000/25);
+    // }
+
+    // isAboveGround(){
+
+    //     return this.y < 180;
+    // }
 
     loadImage(path) {
         this.img = new Image(); 
@@ -38,4 +54,12 @@ class MoveableObject {
             this.img = this.imageCache[path];
             this.currentImage++        
     }
+
+    playAttackAnimation(IMAGES) {
+        let i = this.count;
+        let path = IMAGES[i];
+        this.img = this.imageCache[path];
+         
+    }
+
 }
