@@ -21,7 +21,6 @@ class MoveableObject {
     // }
 
     // isAboveGround(){
-
     //     return this.y < 180;
     // }
 
@@ -38,11 +37,7 @@ class MoveableObject {
         });
     }
 
-    moveRight() {
-        console.log('Moving right')
-    }
-
-    swimLeft() {
+    autoSwimLeft() {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);        
@@ -58,8 +53,7 @@ class MoveableObject {
     playAttackAnimation(IMAGES) {
         let i = this.count;
         let path = IMAGES[i];
-        this.img = this.imageCache[path];
-         
+        this.img = this.imageCache[path];         
     }
 
 }

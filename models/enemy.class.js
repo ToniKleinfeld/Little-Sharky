@@ -22,7 +22,7 @@ class Enemy extends MoveableObject {
         this.y = Math.random() * 405;
         this.speed = 0.15 + Math.random() * 0.25;
 
-        this.swimLeft();
+        this.autoSwimLeft();
         this.animate();        
         
     }

@@ -46,17 +46,17 @@ class Character extends MoveableObject{
     animate() {
         setInterval(() => {
 
-             if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space) {
-                this.swimRight();
-             } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space) {
-                this.swimLeft();
-             } else if (this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space) {
+            if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space) {
+               this.swimRight();
+            } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space) {
+               this.swimLeft();
+            } else if (this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space) {
                 this.swimTop(); 
-             } else if (this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space) {
+            } else if (this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space) {
                 this.swimDown();
             } else {
-                 this.swim_sound.pause()
-            }   
+                this.swim_sound.pause()
+            }
 
             if (this.x > this.world.level.level_end_x || this.x < -590) {
                 
