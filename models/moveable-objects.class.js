@@ -8,21 +8,6 @@ class MoveableObject {
     currentImage = 0;
     speed = 0.15;
     otherDirection = false;
-    // speedY = 0;
-    // acceleration = 1;
-
-    // applyGravity(){
-    //     setInterval(() => {
-    //         if (this.isAboveGround() || this.speedY > 0) {
-    //             this.y -= this.speedY;
-    //             this.speedx -= this.acceleration;
-    //         }
-    //     }, 1000/25);
-    // }
-
-    // isAboveGround(){
-    //     return this.y < 180;
-    // }
 
     loadImage(path) {
         this.img = new Image(); 
@@ -37,10 +22,41 @@ class MoveableObject {
         });
     }
 
-    autoSwimLeft() {
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60);        
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Enemy) { 
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(this.x, this.y, this.width ,this.height );
+        ctx.stroke();
+        }
+    }
+
+    swimLeft() {        
+        this.x -= this.speed;               
+    }
+
+    swimRight(){
+        this.x += this.speed;
+    };
+
+    swimTop() {
+        this.y -= this.speed;
+    }
+
+    swimDown() {
+        this.y += this.speed;
+    }
+
+    moveCamera() {
+        if (this.x > this.world.level.level_end_x || this.x < -590) {                
+        } else {
+            this.world.camera_x = -this.x +110;
+        }
     }
 
     playAnimation(IMAGES) {

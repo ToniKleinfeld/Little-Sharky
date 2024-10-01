@@ -21,18 +21,17 @@ class Enemy extends MoveableObject {
         this.x = 300 + Math.random() * 500;
         this.y = Math.random() * 405;
         this.speed = 0.15 + Math.random() * 0.25;
-
-        this.autoSwimLeft();
-        this.animate();        
         
+        this.animate();  
     }
 
     animate() {
         setInterval(() => { 
             this.playAnimation(this.IMAGES_SWIM);
-        }, 250);   
+        }, 250);  
+
+        setInterval(() => {
+            this.swimLeft();
+        }, 1000 / 60); 
     }
-
-
-
 }

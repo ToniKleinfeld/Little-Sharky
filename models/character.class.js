@@ -39,7 +39,7 @@ class Character extends MoveableObject{
         this.x = 10;
         this.y = 200;
         this.speed = this.speed * 80;
-        // this.applyGravity();
+        
         this.animate();
     }
 
@@ -48,24 +48,24 @@ class Character extends MoveableObject{
 
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space) {
                this.swimRight();
+               this.otherDirection = false;
+               this.swim_sound.play();
             } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space) {
                this.swimLeft();
+               this.otherDirection = true;
+               this.swim_sound.play();
             } else if (this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space) {
                 this.swimTop(); 
+                this.swim_sound.play();
             } else if (this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space) {
                 this.swimDown();
+                this.swim_sound.play();
             } else {
                 this.swim_sound.pause()
             }
 
-            if (this.x > this.world.level.level_end_x || this.x < -590) {
-                
-            } else {
-                this.world.camera_x = -this.x +110;
-            }
-
+            this.moveCamera()
         }, 1000 / 60);
-
 
         setInterval(() => {    
             if (this.world.keyboard.space) { 
@@ -77,8 +77,7 @@ class Character extends MoveableObject{
          if (!this.world.keyboard.space && this.count == 0) {
                 this.swimAnimation();
             }  
-        }, 250);    
-        
+        }, 250);            
     }
 
     finAttack() {
@@ -97,25 +96,4 @@ class Character extends MoveableObject{
         }; 
     };
 
-    swimRight(){
-        this.x += this.speed;
-        this.otherDirection = false;
-        this.swim_sound.play();
-    };
-
-    swimLeft(){
-        this.x -= this.speed;
-        this.otherDirection = true;
-        this.swim_sound.play();
-    };
-
-    swimTop() {
-        this.y -= this.speed;
-        this.swim_sound.play();
-    }
-
-    swimDown() {
-        this.y += this.speed;
-        this.swim_sound.play();
-    }
 }
