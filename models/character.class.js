@@ -39,7 +39,7 @@ class Character extends MoveableObject{
         this.x = 10;
         this.y = 200;
         this.speed = this.speed * 80;
-        
+
         this.animate();
     }
 
@@ -95,5 +95,4 @@ class Character extends MoveableObject{
             this.playAnimation(this.IMAGES_SWIM);
         }; 
     };
-
 }

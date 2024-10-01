@@ -8,6 +8,7 @@ class MoveableObject {
     currentImage = 0;
     speed = 0.15;
     otherDirection = false;
+    energy = 100;
 
     loadImage(path) {
         this.img = new Image(); 
@@ -71,5 +72,22 @@ class MoveableObject {
         let path = IMAGES[i];
         this.img = this.imageCache[path];         
     }
+
+    // isColliding(mo) {
+    //     return (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) && (this.y + this.offsetY + this.height) >= mo.y &&(this.y + this.offsetY) <= (mo.y + mo.height); 
+    // }
+        //  && mo.onCollisionCourse; 
+        // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+
+      isColliding(mo) {
+        return this.x + this.width > mo.x &&
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height;
+      }
+
+      hit() {
+        this.energy -= 2;
+      }
 
 }

@@ -4,9 +4,7 @@ class World {
     ctx;
     canvas;
     keyboard;
-    camera_x = 0;
-
-   
+    camera_x = 0;   
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -14,10 +12,22 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     };
 
     setWorld() {
         this.character.world = this
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+               if ( this.character.isColliding(enemy) ) {
+                    console.log('Treffer mit Gegner', enemy, this.character.energy);
+                    this.character.hit()
+               } 
+            })
+        }, 200);
     }
 
     draw() {
