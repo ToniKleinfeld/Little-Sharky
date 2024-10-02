@@ -9,6 +9,7 @@ class MoveableObject {
     speed = 0.15;
     otherDirection = false;
     energy = 100;
+    lastHit = 0;
 
     loadImage(path) {
         this.img = new Image(); 
@@ -28,7 +29,7 @@ class MoveableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Enemy) { 
+        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss) { 
         ctx.beginPath();
         ctx.lineWidth = '5';
         ctx.strokeStyle = 'blue';
@@ -67,17 +68,11 @@ class MoveableObject {
             this.currentImage++        
     }
 
-    playAttackAnimation(IMAGES) {
+    playAnimationOnes(IMAGES) {
         let i = this.count;
         let path = IMAGES[i];
         this.img = this.imageCache[path];         
     }
-
-    // isColliding(mo) {
-    //     return (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) && (this.y + this.offsetY + this.height) >= mo.y &&(this.y + this.offsetY) <= (mo.y + mo.height); 
-    // }
-        //  && mo.onCollisionCourse; 
-        // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
 
       isColliding(mo) {
         return this.x + this.width > mo.x &&
@@ -87,7 +82,21 @@ class MoveableObject {
       }
 
       hit() {
-        this.energy -= 2;
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit =  new Date().getTime();
+        }
       }
 
+      isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; //ms
+        timepassed = timepassed / 1000; //sec
+        return timepassed < 0.5;
+      }
+
+      isDead() {
+        return this.energy == 0;
+      }
 }

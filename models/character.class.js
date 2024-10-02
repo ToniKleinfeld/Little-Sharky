@@ -27,6 +27,29 @@ class Character extends MoveableObject{
             'img/1.Sharkie/3.Swim/1.png'
         ];
 
+        IMAGES_DEAD = [
+            'img/1.Sharkie/6.dead/1.Poisoned/1.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/2.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/3.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/4.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/5.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/6.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/7.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/8.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/9.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/10.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/11.png',
+            'img/1.Sharkie/6.dead/1.Poisoned/12.png'
+        ];
+
+        IMAGES_HIT_POISEN = [
+            'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+            'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+            'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+            'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
+            'img/1.Sharkie/5.Hurt/1.Poisoned/5.png'
+        ];
+
     world;
 
     swim_sound = new Audio('audio/swim.mp3')
@@ -36,6 +59,8 @@ class Character extends MoveableObject{
         super().loadImage('img/1.Sharkie/3.Swim/1.png')
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_ATTACK_FIN);
+        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HIT_POISEN);
         this.x = 10;
         this.y = 200;
         this.speed = this.speed * 80;
@@ -45,8 +70,9 @@ class Character extends MoveableObject{
 
     animate() {
         setInterval(() => {
-
-            if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space) {
+            if (this.isDead()) {
+                this.swim_sound.pause()
+            } else if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space) {
                this.swimRight();
                this.otherDirection = false;
                this.swim_sound.play();
@@ -67,27 +93,44 @@ class Character extends MoveableObject{
             this.moveCamera()
         }, 1000 / 60);
 
-        setInterval(() => {    
-            if (this.world.keyboard.space) { 
+        setInterval(() => {
+            if (this.isDead()) { 
+                if (this.count !== this.IMAGES_DEAD.length-1 && this.energy == 0) {
+                    this.swim_sound.pause()           
+                    this.animateDead();   
+                }   
+            } else if (this.isHurt()) {
+                this.animateHitPoisen();
+            } else if (this.world.keyboard.space) { 
                 this.finAttack();
-            } 
-        }, 60); 
+            }
+        }, 60);
 
         setInterval(() => {    
-         if (!this.world.keyboard.space && this.count == 0) {
+         if (!this.world.keyboard.space && this.count == 0 && this.energy > 0) {
                 this.swimAnimation();
             }  
         }, 250);            
     }
 
     finAttack() {
-        this.playAttackAnimation(this.IMAGES_ATTACK_FIN)         
-        this.count++  
+        this.playAnimationOnes(this.IMAGES_ATTACK_FIN);         
+        this.count++;  
 
         if (this.count == this.IMAGES_ATTACK_FIN.length ) {                    
             this.world.keyboard.space = false;
             this.count = 0;                                                   
         }  
+    }
+
+    animateDead() {
+        this.count++;
+        this.playAnimationOnes(this.IMAGES_DEAD);   
+    }
+
+    animateHitPoisen() {
+        
+        this.playAnimation(this.IMAGES_HIT_POISEN);
     }
 
     swimAnimation() {
