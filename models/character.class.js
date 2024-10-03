@@ -128,8 +128,7 @@ class Character extends MoveableObject{
         this.playAnimationOnes(this.IMAGES_DEAD);   
     }
 
-    animateHitPoisen() {
-        
+    animateHitPoisen() {        
         this.playAnimation(this.IMAGES_HIT_POISEN);
     }
 
