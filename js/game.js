@@ -34,5 +34,7 @@ document.addEventListener('keyup', (e) => {
         keyboard.left = false;
     } else if (e.keyCode == 40) {
         keyboard.down = false;
-    } 
+    } else if (e.keyCode == 68) {
+        keyboard.d = false;
+    }
 })

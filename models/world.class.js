@@ -8,6 +8,7 @@ class World {
     statusBar = new HpStatusBar();
     coinStatusBar = new CoinStatusBar();
     poisonStatusBar = new PoisonStatusBar();
+    throwableObject = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -15,21 +16,17 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     };
 
     setWorld() {
         this.character.world = this
     }
 
-    checkCollisions() {
-        setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-               if ( this.character.isColliding(enemy) && !this.character.isHurt()) {
-                    this.character.hit();
-                    this.statusBar.setPrecentage(this.character.energy);
-               } 
-            })
+    run() {
+        setInterval(() => {            
+            this.checkCollisions()
+            this.checkTrowableObjects()
         }, 200);
     }
 
@@ -42,6 +39,7 @@ class World {
         this.addObjectsToMap(this.level.light); 
         this.addObjectsToMap(this.level.backgroundfloor);    
         this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObject)
         this.addObjectsToMap(this.level.enemies);            
 
         this.ctx.translate(-this.camera_x,0);
@@ -54,6 +52,23 @@ class World {
         requestAnimationFrame(function() {
             self.draw();
         });      
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if ( this.character.isColliding(enemy) && !this.character.isHurt()) {
+                 this.character.hit();
+                 this.statusBar.setPrecentage(this.character.energy);
+            } 
+         })
+    }
+
+    checkTrowableObjects() {
+        if (this.keyboard.d && this.character.energy > 0) {
+            console.log()
+            let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection);
+            this.throwableObject.push(bubble);
+        }
     }
 
     addObjectsToMap(object) {
