@@ -38,3 +38,5 @@ document.addEventListener('keyup', (e) => {
         keyboard.d = false;
     }
 })
+
+InitLevel() // load level 1 <-- use later for start button when overlay designed

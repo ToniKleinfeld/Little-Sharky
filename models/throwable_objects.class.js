@@ -1,7 +1,5 @@
 class ThrowableObjects extends MoveableObject {
 
-
-
     speedX = 20;
 
     constructor(x,y,direction){
