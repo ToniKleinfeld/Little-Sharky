@@ -61,11 +61,11 @@ class Endboss extends MoveableObject {
             }  
 
         this.spawnAnimation++
-        }, 250);   
+        }, 150);   
     }
 
     firstContactBoss() { 
-        if (world.character.x > 3400 && !this.firstContact) {
+        if (world.character.x > 3200 && !this.firstContact) {
             this.firstContact = true; 
             this.spawnAnimation = 0;                        
         }   
