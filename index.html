@@ -29,9 +29,30 @@
 <div class="background">
     <h1>Little Sharky</h1>
 
-    <canvas width="720px" height="480px" id="canvas">
+    <div class="canvascontainer">
+        <canvas width="720px" height="480px" id="canvas">
+        </canvas>
+    
+        <div class="pannel">
 
-    </canvas>
+            <div class="pannel-wrapper left-pannel">
+                <button class="playBtn" id="leftButton">🡠</button>
+
+                <div class="pannel-inlinewrapper">                    
+                    <button class="playBtn" id="topButton">🡡</button>
+                    <button class="playBtn" id="downButton">🡣</button>
+                </div>                
+                             
+                <button class="playBtn" id="rightButton">🡢</button>
+            </div>
+
+            <div class="pannel-wrapper right-pannel">
+                <button class="playBtn space" id="spaceButton">Space</button>
+                <button class="playBtn d" id="dButton">D</button>
+            </div>
+
+        </div>
+    </div>
     
 </div>
 
