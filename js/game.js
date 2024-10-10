@@ -34,8 +34,6 @@ document.addEventListener('keyup', (e) => {
         keyboard.left = false;
     } else if (e.keyCode == 40) {
         keyboard.down = false;
-    } else if (e.keyCode == 68) {
-        keyboard.d = false;
     }
 })
 
@@ -64,9 +62,7 @@ document.addEventListener('touchend', (e) => {
         keyboard.left = false;
     } else if (e.target.id == 'downButton') {
         keyboard.down = false;
-    }  else if (e.target.id == 'dButton') {
-        keyboard.d = false;
-    } 
+    }
 })
 
 InitLevel() // load level 1 <-- use later for start button when overlay designed

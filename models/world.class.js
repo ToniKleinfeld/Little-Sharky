@@ -25,8 +25,7 @@ class World {
 
     run() {
         setInterval(() => {            
-            this.checkCollisions()
-            this.checkTrowableObjects()
+            this.checkCollisions()            
         }, 200);
     }
 
@@ -64,8 +63,7 @@ class World {
     }
 
     checkTrowableObjects() {
-        if (this.keyboard.d && this.character.energy > 0) {
-            console.log()
+        if (this.character.energy > 0 && this.keyboard.d ) {
             let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection);
             this.throwableObject.push(bubble);
         }
@@ -84,6 +82,7 @@ class World {
 
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
+        mo.drawHitframe(this.ctx)
 
         if (mo.otherDirection) {
             this.flipImageBack(mo)

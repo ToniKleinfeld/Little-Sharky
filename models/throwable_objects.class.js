@@ -11,8 +11,7 @@ class ThrowableObjects extends MoveableObject {
         this.trow(direction)
     }
 
-    trow(direction) {     
-        
+    trow(direction) {        
         setInterval(() => {
             this.checkTrwowAbleObjectDirection(direction);            
         },10);
