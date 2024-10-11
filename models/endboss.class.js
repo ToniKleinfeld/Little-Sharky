@@ -50,7 +50,7 @@ class Endboss extends MoveableObject {
 
     animate() {
         
-        setInterval(() => {  
+        this.setStoppableInterval(() => {  
 
            this.firstContactBoss();
 

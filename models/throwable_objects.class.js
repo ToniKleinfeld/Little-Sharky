@@ -14,7 +14,7 @@ class ThrowableObjects extends MoveableObject {
     }
 
     trow(direction) {        
-        setInterval(() => {
+        this.setStoppableInterval(() => {
             this.checkTrwowAbleObjectDirection(direction);            
         },10);
     }
@@ -37,8 +37,7 @@ class ThrowableObjects extends MoveableObject {
     }
 
     checkMovedDistance() {
-        console.log(this.startX + 600, this.x)
-        if (this.startX + 600 == this.x || this.startX - 600 == this.x) {  
+        if (this.startX + 500 == this.x || this.startX - 500 == this.x) {  
                 // Intervall vom objeckt muss noch beendet werden!!
             world.throwableObject.splice(0,1);            
         }

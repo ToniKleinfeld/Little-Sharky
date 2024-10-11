@@ -13,7 +13,7 @@ class Light extends MoveableObject {
     }
 
     moveLeft() {
-        setInterval(() => {
+        this.setStoppableInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);        
     }

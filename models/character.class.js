@@ -138,7 +138,7 @@ class Character extends MoveableObject{
     }
 
     animate() {
-        setInterval(() => {
+        this.setStoppableInterval(() => {
             if (this.isDead()) {
                 this.swim_sound.pause()
             } else if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space && !this.world.keyboard.d) {
@@ -162,7 +162,7 @@ class Character extends MoveableObject{
             this.moveCamera()
         }, 1000 / 60);
 
-        setInterval(() => {
+        this.setStoppableInterval(() => {
             if (this.isDead()) { 
                 if (this.count !== this.IMAGES_DEAD.length-1 && this.energy == 0) {
                     this.swim_sound.pause()           
@@ -178,7 +178,7 @@ class Character extends MoveableObject{
             }
         }, 60);
 
-        setInterval(() => {    
+        this.setStoppableInterval(() => {    
          if (this.count == 0 && this.energy > 0 && this.checkIfAnyKeyPressed()) {
                 this.swimAnimation();
             } else if(!this.isDead() && Date.now() - this.timeCount <= 5000){

@@ -3,6 +3,7 @@ class MoveableObject extends DrawableObject{
     otherDirection = false;
     energy = 100;
     lastHit = 0;
+    intervalIds = [];
 
     swimLeft() {        
         this.x -= this.speed;               
@@ -72,4 +73,9 @@ class MoveableObject extends DrawableObject{
       isDead() {
         return this.energy == 0;
       }
+
+      setStoppableInterval(fn,time) {
+        let id = setInterval(fn,time);
+        this.intervalIds.push(id);
+    }
 }

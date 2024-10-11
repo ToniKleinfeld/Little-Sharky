@@ -20,8 +20,7 @@ class DrawableObject {
         });
     }
 
-    draw(ctx) {
-        
+    draw(ctx) {        
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } catch (e) {

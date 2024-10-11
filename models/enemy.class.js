@@ -26,11 +26,11 @@ class Enemy extends MoveableObject {
     }
 
     animate() {
-        setInterval(() => { 
+        this.setStoppableInterval(() => { 
             this.playAnimation(this.IMAGES_SWIM);
         }, 250);  
 
-        setInterval(() => {
+        this.setStoppableInterval(() => {
             this.swimLeft();
         }, 1000 / 60); 
     }
