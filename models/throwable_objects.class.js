@@ -37,7 +37,7 @@ class ThrowableObjects extends MoveableObject {
     }
 
     checkMovedDistance() {
-        if (this.startX + 500 == this.x || this.startX - 500 == this.x) {  
+        if (this.startX + 400 == this.x || this.startX - 400 == this.x) {  
             this.stopIntervall(this.intervalIds[0])
             world.throwableObject.splice(0,1);                                   
         }
