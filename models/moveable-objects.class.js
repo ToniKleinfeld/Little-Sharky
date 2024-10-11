@@ -78,4 +78,8 @@ class MoveableObject extends DrawableObject{
         let id = setInterval(fn,time);
         this.intervalIds.push(id);
     }
+
+    stopIntervall(id) {        
+         clearInterval(id) 
+    }
 }

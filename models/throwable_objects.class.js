@@ -28,18 +28,18 @@ class ThrowableObjects extends MoveableObject {
     }
 
     checkTrwowAbleObjectDirection(direction) {
-        this.checkMovedDistance()
         if (!direction) {
             this.x += 5;
         } else {
             this.x -= 5;
         }
+        this.checkMovedDistance()
     }
 
     checkMovedDistance() {
         if (this.startX + 500 == this.x || this.startX - 500 == this.x) {  
-                // Intervall vom objeckt muss noch beendet werden!!
-            world.throwableObject.splice(0,1);            
+            this.stopIntervall(this.intervalIds[0])
+            world.throwableObject.splice(0,1);                                   
         }
     }
 }
