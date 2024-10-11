@@ -26,7 +26,7 @@ class World {
     run() {
         setInterval(() => {            
             this.checkCollisions()            
-        }, 200);
+        }, 80);
     }
 
     draw() {
@@ -58,7 +58,8 @@ class World {
             if ( this.character.isColliding(enemy) && !this.character.isHurt()) {
                  this.character.hit();
                  this.statusBar.setPrecentage(this.character.energy);
-            } 
+            }  
+            this.character.selectHitAnimation(enemy);
          })
     }
 

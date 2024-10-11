@@ -168,8 +168,6 @@ class Character extends MoveableObject{
                     this.swim_sound.pause()           
                     this.animateDead();   
                 }   
-            } else if (this.isHurt()) {
-                this.animateHitPoisen();
             } else if (this.world.keyboard.space) { 
                 this.finAttack();
             } else if (this.world.keyboard.d) {
@@ -241,5 +239,11 @@ class Character extends MoveableObject{
         } else {
             return false
         }
-    }    
+    }
+
+    selectHitAnimation(enemy) {
+        if((enemy instanceof Enemy || enemy instanceof Endboss) && this.isHurt()){
+            this.animateHitPoisen()
+         }
+    }
 }

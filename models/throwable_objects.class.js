@@ -1,6 +1,7 @@
 class ThrowableObjects extends MoveableObject {
 
     speedX = 20;
+    startX;
 
     constructor(x,y,direction){
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
@@ -9,6 +10,7 @@ class ThrowableObjects extends MoveableObject {
         this.y = y + 85;
         this.x = this.checkDirectionOfX(direction,x);
         this.trow(direction)
+        this.startX = this.x
     }
 
     trow(direction) {        
@@ -26,10 +28,19 @@ class ThrowableObjects extends MoveableObject {
     }
 
     checkTrwowAbleObjectDirection(direction) {
+        this.checkMovedDistance()
         if (!direction) {
             this.x += 5;
         } else {
             this.x -= 5;
+        }
+    }
+
+    checkMovedDistance() {
+        console.log(this.startX + 600, this.x)
+        if (this.startX + 600 == this.x || this.startX - 600 == this.x) {  
+                // Intervall vom objeckt muss noch beendet werden!!
+            world.throwableObject.splice(0,1);            
         }
     }
 }
