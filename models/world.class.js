@@ -9,6 +9,7 @@ class World {
     coinStatusBar = new CoinStatusBar();
     poisonStatusBar = new PoisonStatusBar();
     throwableObject = [];
+    UserInteractWithSideforSounds = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -25,8 +26,9 @@ class World {
 
     run() {
         this.character.setStoppableInterval(() => {            
-            this.checkCollisions()            
-        }, 80);
+            this.checkCollisions();
+            this.playBackgroundMusic();         
+        },100 / 60);
     }
 
     draw() {
@@ -60,6 +62,7 @@ class World {
                  this.statusBar.setPrecentage(this.character.energy);
             }  
             this.character.selectHitAnimation(enemy);
+            
          })
     }
 
@@ -100,5 +103,11 @@ class World {
     flipImageBack(mo) {
         mo.x = mo.x * -1
         this.ctx.restore()
+    }
+
+    playBackgroundMusic() {
+        if (this.UserInteractWithSideforSounds) {
+            this.level.backgroundmusic[0].play();  
+        } 
     }
 }

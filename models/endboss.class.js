@@ -33,7 +33,14 @@ class Endboss extends MoveableObject {
     ];
 
     firstContact;
-    spawnAnimation;    
+    spawnAnimation;
+    
+    offset = {
+        top:90,
+        left:15,
+        right:20,
+        bottom:40
+    };
     
     constructor() {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png')

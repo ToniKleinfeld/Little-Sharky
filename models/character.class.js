@@ -29,7 +29,7 @@ class Character extends MoveableObject{
             'img/1.Sharkie/3.Swim/1.png'
         ];
 
-        IMAGES_DEAD = [
+        IMAGES_DEAD_POISEN = [
             'img/1.Sharkie/6.dead/1.Poisoned/1.png',
             'img/1.Sharkie/6.dead/1.Poisoned/2.png',
             'img/1.Sharkie/6.dead/1.Poisoned/3.png',
@@ -111,20 +111,22 @@ class Character extends MoveableObject{
     world;
 
     offset = {
-        top:60,
+        top:70,
         left:30,
         right:30,
         bottom:30
     };
 
-    swim_sound = new Audio('audio/swim.mp3')
+    swim_sound = new Audio('audio/swim.mp3');
+    bubble_sound = new Audio('audio/blowbubble.mp3');
+    tail_sound = new Audio('audio/tailattack.mp3');
     
 
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png')
         this.loadImages(this.IMAGES_SWIM);
         this.loadImages(this.IMAGES_ATTACK_FIN);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_DEAD_POISEN);
         this.loadImages(this.IMAGES_HIT_POISEN);
         this.loadImages(this.IMAGES_BUBBLE_TRAP);
         this.loadImages(this.IMAGES_IDLE);
@@ -145,6 +147,7 @@ class Character extends MoveableObject{
                this.swimRight();
                this.otherDirection = false;
                this.swim_sound.play();
+               this.world.UserInteractWithSideforSounds = true; // später auf den play Button binden!
             } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space && !this.world.keyboard.d ) {
                this.swimLeft();
                this.otherDirection = true;
@@ -164,17 +167,23 @@ class Character extends MoveableObject{
 
         this.setStoppableInterval(() => {
             if (this.isDead()) { 
-                if (this.count !== this.IMAGES_DEAD.length-1 && this.energy == 0) {
+                if (this.count !== this.IMAGES_DEAD_POISEN.length-1 && this.energy == 0) {
                     this.swim_sound.pause()           
                     this.animateDead();   
                 }   
             } else if (this.world.keyboard.space) { 
                 this.finAttack();
             } else if (this.world.keyboard.d) {
-                if (this.count == 6) {
+                if (this.count == 6) { 
                     this.world.checkTrowableObjects();
                 }    
-                this.bubbleTrap();            
+                this.bubbleTrap(); 
+          
+            } else {
+                this.tail_sound.currentTime = 0;
+                this.tail_sound.pause();
+                this.bubble_sound.currentTime = 0;
+                this.bubble_sound.pause();   
             }
         }, 60);
 
@@ -194,6 +203,8 @@ class Character extends MoveableObject{
     finAttack() {
         this.playAnimationOnes(this.IMAGES_ATTACK_FIN);         
         this.count++;  
+        this.tail_sound.play();
+        this.tail_sound.volume = 0.8;
 
         if (this.count == this.IMAGES_ATTACK_FIN.length ) {                    
             this.world.keyboard.space = false;
@@ -203,7 +214,10 @@ class Character extends MoveableObject{
 
     bubbleTrap() {
         this.playAnimationOnes(this.IMAGES_BUBBLE_TRAP);         
-        this.count++;  
+        this.count++;
+        this.bubble_sound.play();
+        this.bubble_sound.playbackRate = 10;
+        this.bubble_sound.volume = 0.3;  
 
         if (this.count == this.IMAGES_BUBBLE_TRAP.length ) {                    
             this.world.keyboard.d = false;
@@ -213,11 +227,12 @@ class Character extends MoveableObject{
 
     animateDead() {
         this.count++;
-        this.playAnimationOnes(this.IMAGES_DEAD);   
+        this.playAnimationOnes(this.IMAGES_DEAD_POISEN);   
     }
 
     animateHitPoisen() {        
         this.playAnimation(this.IMAGES_HIT_POISEN);
+        this.getHited()   
     }
 
     swimAnimation() {
@@ -239,6 +254,14 @@ class Character extends MoveableObject{
         } else {
             return false
         }
+    }
+
+    getHited() {
+        if (this.otherDirection) {
+            this.x = this.x + 0.5
+        } else {
+            this.x = this.x - 0.5
+        }     
     }
 
     selectHitAnimation(enemy) {
