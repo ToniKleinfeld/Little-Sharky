@@ -7,11 +7,21 @@ class DrawableObject {
     height;
     width;
 
+    /**
+     * function to load the images
+     * 
+     * @param {string} path - path of the Images , which should be load
+     */
     loadImage(path) {
         this.img = new Image(); 
         this.img.src = path;
     }
 
+    /**
+     * load every images of a array to the imageCache
+     * 
+     * @param {Array} arr - Array with the Img pathes
+     */
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -20,6 +30,11 @@ class DrawableObject {
         });
     }
 
+    /**
+     * method to show the images to the Canvas
+     * 
+     * @param {string} ctx - value for add images to the canvas
+     */
     draw(ctx) {        
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -29,6 +44,11 @@ class DrawableObject {
         }
     }  
 
+    /**
+     * draw a Framebox on the Char, enemy and Enboss , get later deleted
+     * 
+     * @param {string} ctx - value for add images to the canvas
+     */
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Enemy || this instanceof Endboss) { 
         ctx.beginPath();
@@ -39,6 +59,11 @@ class DrawableObject {
         }
     }
 
+    /**
+     * draw a a smaller Framebox on the Char, enemy and Enboss for hit , get later deleted
+     * 
+     * @param {string} ctx - value for add images to the canvas
+     */
     drawHitframe(ctx) {
         if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof ThrowableObjects) { 
             ctx.beginPath();

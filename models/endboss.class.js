@@ -55,22 +55,27 @@ class Endboss extends MoveableObject {
         this.animate();
     }
 
+    /**
+     *repead calls the if stated to check for changes for current Animations and sounds     
+     */
     animate() {
-        
-        this.setStoppableInterval(() => {  
-
+        /**
+         * this intervall check which animation should be displayed
+         */
+        this.setStoppableInterval(() => {
            this.firstContactBoss();
-
             if (this.spawnAnimation < 10) {
                 this.playAnimation(this.IMAGES_SPAWN)            
             } else if (this.firstContact) {
                 this.playAnimation(this.IMAGES_FLOATING); 
-            }  
-
+            }
         this.spawnAnimation++
         }, 150);   
     }
 
+    /**
+     * check if char is near the boss first time, and reset the animation counter to zero and set first contact to true when meet
+     */
     firstContactBoss() { 
         if (world.character.x > 3200 && !this.firstContact) {
             this.firstContact = true; 

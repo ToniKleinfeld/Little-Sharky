@@ -9,10 +9,13 @@ class Light extends MoveableObject {
         this.x = x;
         this.y = y;
 
-        this.moveLeft();
+        this.animate();
     }
 
-    moveLeft() {
+    /**
+     * let the lightimg's in background move slowly to the left side
+     */
+    animate() {
         this.setStoppableInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);        

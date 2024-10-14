@@ -13,12 +13,25 @@ class ThrowableObjects extends MoveableObject {
         this.startX = this.x
     }
 
+
+    /**
+     * repead check if an trowable object is in array and move it to left or right depending on param direction
+     * 
+     * @param {boolean} direction - get the info if the char is swim to left
+     */
     trow(direction) {        
         this.setStoppableInterval(() => {
             this.checkTrwowAbleObjectDirection(direction);            
         },10);
     }
 
+    /**
+     * set the startpoint of the Bubble depending on swim left or right
+     * 
+     * @param {boolean} direction - get the info if the char is swim to left
+     * @param {number} x - position of startpoint
+     * @returns the x or add 150px to x and return new value
+     */
     checkDirectionOfX(direction,x) {
         if (!direction) {
            return x + 150;     
@@ -27,6 +40,11 @@ class ThrowableObjects extends MoveableObject {
         }
     }
 
+    /**
+     * Check in witch direction the object is moving ,left or right
+     * 
+     * @param {boolean} direction - get the info if the char is swim to left
+     */
     checkTrwowAbleObjectDirection(direction) {
         if (!direction) {
             this.x += 5;
@@ -36,6 +54,9 @@ class ThrowableObjects extends MoveableObject {
         this.checkMovedDistance()
     }
 
+    /**
+     * check how far the bubble object is moved from startposition and splice is out of array after 400px and stop the call intervall
+     */
     checkMovedDistance() {
         if (this.startX + 400 == this.x || this.startX - 400 == this.x) {  
             this.stopIntervall(this.intervalIds[0])

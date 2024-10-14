@@ -60,6 +60,9 @@ class World {
             if ( this.character.isColliding(enemy) && !this.character.isHurt()) {
                  this.character.hit();
                  this.statusBar.setPrecentage(this.character.energy);
+                 if (this.character.energy > 0) {
+                    enemy.contactToCharacter = true
+                 }                
             }  
             this.character.selectHitAnimation(enemy);
             
