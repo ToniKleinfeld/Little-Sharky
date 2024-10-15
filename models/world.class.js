@@ -69,16 +69,22 @@ class World {
      */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if ( this.character.isColliding(enemy) && !this.character.isHurt()) {
-                 this.character.hit();
-                 this.statusBar.setPrecentage(this.character.energy);
-                 if (this.character.energy > 0) {
-                    enemy.contactToCharacter = true
-                 }                
-            }  
-            this.character.selectHitAnimation(enemy);
+            if ( this.character.isColliding(enemy) && !this.character.isHurt() && !this.keyboard.space && !this.keyboard.d && enemy.energy > 0) {
+                this.getHitedByEnemy(enemy);                 
+            } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy)) {
+                enemy.energy = 0;  
+            }            
+            this.character.selectHitAnimation(enemy);            
             
          })
+    }
+
+    getHitedByEnemy(enemy) {
+        this.character.hit();
+        this.statusBar.setPrecentage(this.character.energy);
+        if (this.character.energy > 0) {
+           enemy.contactToCharacter = true
+        }
     }
 
     /**

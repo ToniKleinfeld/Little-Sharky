@@ -118,14 +118,26 @@ class Character extends CharacterImgSet{
      */
     finAttack() {
         this.playAnimationOnes(this.IMAGES_ATTACK_FIN);         
-        this.count++;  
+        this.count++;
+        this.directionFinAttack();
         this.tail_sound.play();
         this.tail_sound.volume = 0.8;
 
         if (this.count == this.IMAGES_ATTACK_FIN.length ) {                    
             this.world.keyboard.space = false;
-            this.count = 0;                                                   
+            this.count = 0;                                                    
         }  
+    }
+
+    /**
+     * push forward , depends on direction ,when calling finAttack()
+     */
+    directionFinAttack(){
+        if (this.otherDirection) {
+            this.x = this.x - 10;
+        } else {
+            this.x = this.x + 10;
+        }
     }
 
     /**
@@ -205,15 +217,15 @@ class Character extends CharacterImgSet{
     }
 
     /**
-     * When the char collied with enemy , check if which direction he swim an push him back if not on border of world
-     * set timeCount to current time when hit , to break idle animation without pressing any key
-     */
-        getHited() {
-            if (this.otherDirection && this.x + 0.5 < (3975)) {
-                this.x = this.x + 0.5
-            } else if(this.x - 0.5 > (-718)){
-                this.x = this.x - 0.5
-            }
-            this.timeCount = Date.now();     
+    * When the char collied with enemy , check if which direction he swim an push him back if not on border of world
+    * set timeCount to current time when hit , to break idle animation without pressing any key
+    */
+    getHited() {
+        if (this.otherDirection && this.x + 0.5 < (3975)) {
+            this.x = this.x + 0.5
+        } else if(this.x - 0.5 > (-718)){
+            this.x = this.x - 0.5
         }
+        this.timeCount = Date.now();
+    }
 }
