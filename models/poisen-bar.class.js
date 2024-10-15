@@ -20,12 +20,22 @@ class PoisonStatusBar extends DrawableObject{
         this.setPrecentage(100);
     }
 
+    /**
+     * Set the current draw image to current precentage
+     * 
+     * @param {number} precentage - get the current precentage
+     */
     setPrecentage(precentage) {
         this.precentage = precentage;
         let path = this.IMAGES_POISEN[this.resolveImageIndex()]
         this.img = this.imageCache[path]
     }
-
+    
+    /**
+     * Get the image number for current status per precentage hight
+     * 
+     * @returns number 
+     */
     resolveImageIndex() {
         if (this.precentage == 100) {
            return 5; 

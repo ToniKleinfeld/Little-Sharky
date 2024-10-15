@@ -20,10 +20,16 @@ class World {
         this.run();
     };
 
+    /**
+     * let the character class acess to world class
+     */
     setWorld() {
         this.character.world = this
     }
 
+    /**
+     * intervall to caLL collision function , and backgroundmusic
+     */
     run() {
         this.character.setStoppableInterval(() => {            
             this.checkCollisions();
@@ -31,6 +37,9 @@ class World {
         },100 / 60);
     }
 
+    /**
+     * Function to add all object to canvas , when game starts
+     */
     draw() {
         this.ctx.clearRect(0,0, this.canvas.width , this.canvas.height);
 
@@ -55,6 +64,9 @@ class World {
         });      
     }
 
+    /**
+     * check for every object in array enemies , if it collide with the character and call following function when yes
+     */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if ( this.character.isColliding(enemy) && !this.character.isHurt()) {
@@ -69,6 +81,9 @@ class World {
          })
     }
 
+    /**
+     * check if keyboad d is pressed and the character still allive , to create a bubble object to the array depending on wich direction the char is swimming
+     */
     checkTrowableObjects() {
         if (this.character.energy > 0 && this.keyboard.d ) {
             let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection);
@@ -76,12 +91,22 @@ class World {
         }
     }
 
+    /**
+     * take an Objekt and call for every string addToMap function
+     * 
+     * @param {string} object - string from object -> image path
+     */
     addObjectsToMap(object) {
         object.forEach(o => {
             this.addToMap(o);
         });
     }
 
+    /**
+     * Draw the Img to the canvas , check if the image should be flip
+     * 
+     * @param {string} mo - string from object -> image path
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -96,6 +121,11 @@ class World {
         }        
     }
 
+    /**
+     * save the image and flip it
+     * 
+     * @param {string} mo - string from object -> image path
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width ,0);
@@ -103,11 +133,19 @@ class World {
         mo.x = mo.x * -1;  
     }
 
+    /**
+     * Flip the image back to Orginal
+     * 
+     * @param {string} mo - string from object -> image path
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1
         this.ctx.restore()
     }
 
+    /**
+     * Play backgroundmusic , when user interactet with webside
+     */
     playBackgroundMusic() {
         if (this.UserInteractWithSideforSounds) {
             this.level.backgroundmusic[0].play();  
