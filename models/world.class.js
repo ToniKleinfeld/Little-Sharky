@@ -69,7 +69,7 @@ class World {
      */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if ( this.character.isColliding(enemy) && !this.character.isHurt() && !this.keyboard.space && !this.keyboard.d && enemy.energy > 0) {
+            if ( this.character.isColliding(enemy) && !this.character.isHurt() && !this.keyboard.space && enemy.energy > 0) {
                 this.getHitedByEnemy(enemy);                 
             } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy)) {
                 enemy.energy = 0;  
@@ -79,11 +79,16 @@ class World {
          })
     }
 
-    getHitedByEnemy(enemy) {
+    /**
+     * when character collide with enemy without attack calling these functions
+     * 
+     * @param {string} mo- value from object
+     */
+    getHitedByEnemy(mo) {
         this.character.hit();
         this.statusBar.setPrecentage(this.character.energy);
-        if (this.character.energy > 0) {
-           enemy.contactToCharacter = true
+        if (this.character.energy > 0 && mo.energy > 0) {
+           mo.contactToCharacter = true
         }
     }
 
