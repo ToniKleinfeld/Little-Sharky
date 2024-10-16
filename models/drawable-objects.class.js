@@ -50,7 +50,7 @@ class DrawableObject {
      * @param {string} ctx - value for add images to the canvas
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss) { 
+        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof EnemyTwo) { 
         ctx.beginPath();
         ctx.lineWidth = '5';
         ctx.strokeStyle = 'blue';
@@ -65,7 +65,7 @@ class DrawableObject {
      * @param {string} ctx - value for add images to the canvas
      */
     drawHitframe(ctx) {
-        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof ThrowableObjects) { 
+        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof ThrowableObjects || this instanceof EnemyTwo) { 
             ctx.beginPath();
             ctx.lineWidth = '4';
             ctx.strokeStyle = 'red';

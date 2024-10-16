@@ -6,6 +6,10 @@ function InitLevel() {
             new Enemy(1),
             new Enemy(2),
             new Enemy(3),
+            new EnemyTwo(1),
+            new EnemyTwo(2),
+            new EnemyTwo(3),
+            new EnemyTwo(4),            
             new Endboss(),
         ],
         [   

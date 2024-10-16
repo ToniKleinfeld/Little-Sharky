@@ -74,7 +74,8 @@ class World {
             } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy)) {
                 enemy.energy = 0;  
             }            
-            this.character.selectHitAnimation(enemy);            
+            this.character.selectHitAnimation(enemy);
+                        
             
          })
     }

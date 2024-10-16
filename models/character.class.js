@@ -210,10 +210,12 @@ class Character extends CharacterImgSet{
      * @param {string} enemy - current Enemy from enemies Array
      */
     selectHitAnimation(enemy) {
-        if((enemy instanceof Enemy || enemy instanceof Endboss) && this.isHurt()){
+        if(enemy instanceof Enemy && this.isHurt() || enemy instanceof Endboss && this.isHurt()){
             this.animateHitPoisen();
-            this.getHited()
-         }        
+            this.getHited();
+            console.log(enemy instanceof Enemy)
+         }  
+              
     }
 
     /**
