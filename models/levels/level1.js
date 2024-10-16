@@ -3,9 +3,9 @@ let level1;
 function InitLevel() {
     level1 = new darklevel(
         [
-            new Enemy(),
-            new Enemy(),
-            new Enemy(),
+            new Enemy(1),
+            new Enemy(2),
+            new Enemy(3),
             new Endboss(),
         ],
         [   
