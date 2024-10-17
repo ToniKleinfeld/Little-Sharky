@@ -100,6 +100,12 @@ class CharacterImgSet extends MoveableObject {
         'img/1.Sharkie/2.Long_IDLE/i14.png',        
     ];
 
+    IMAGES_HIT_ELEKTRO = [
+        'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/3.png',
+    ]
+
     character;
 
     constructor() {
@@ -111,6 +117,7 @@ class CharacterImgSet extends MoveableObject {
         this.loadImages(this.IMAGES_BUBBLE_TRAP);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
-        this.loadImages(this.IMAGES_LONG_IDLELOOP);        
+        this.loadImages(this.IMAGES_LONG_IDLELOOP);
+        this.loadImages(this.IMAGES_HIT_ELEKTRO);       
     }
 }

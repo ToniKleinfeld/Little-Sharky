@@ -165,10 +165,17 @@ class Character extends CharacterImgSet{
     }
 
     /**
-     * Play the 
+     * Play the hit animation for normal hit
      */
     animateHitPoisen() {        
         this.playAnimation(this.IMAGES_HIT_POISEN);           
+    }
+
+    /**
+     * Play the hit animation for elektro hit
+     */
+    animateHitElektro() {
+        this.playAnimation(this.IMAGES_HIT_ELEKTRO);
     }
 
     /**
@@ -210,19 +217,20 @@ class Character extends CharacterImgSet{
      * @param {string} enemy - current Enemy from enemies Array
      */
     selectHitAnimation(enemy) {
-        if(enemy instanceof Enemy && this.isHurt() || enemy instanceof Endboss && this.isHurt()){
+        if((enemy instanceof Enemy || enemy instanceof Endboss) && this.isHurt() && this.world.character.isColliding(enemy) || enemy instanceof EnemyTwo && this.isHurt() && this.world.character.isColliding(enemy) && !enemy.enemytype.dangerous){
             this.animateHitPoisen();
-            this.getHited();
-            console.log(enemy instanceof Enemy)
-         }  
-              
+            this.moveWhenGetHited();            
+         } else if (enemy instanceof EnemyTwo && this.isHurt() && this.world.character.isColliding(enemy) && enemy.enemytype.dangerous) {
+            this.animateHitElektro();
+            this.moveWhenGetHited(); 
+         }   
     }
 
     /**
     * When the char collied with enemy , check if which direction he swim an push him back if not on border of world
     * set timeCount to current time when hit , to break idle animation without pressing any key
     */
-    getHited() {
+    moveWhenGetHited() {
         if (this.otherDirection && this.x + 0.5 < (3975)) {
             this.x = this.x + 0.5
         } else if(this.x - 0.5 > (-718)){
