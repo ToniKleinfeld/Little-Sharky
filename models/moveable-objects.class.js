@@ -107,10 +107,10 @@ class MoveableObject extends DrawableObject{
      * @param {string} mo -value from object
      */
     setlastHitTyp(mo) {
-        if ((mo instanceof Enemy || mo instanceof Endboss || mo instanceof EnemyTwo) && !mo.enemytype.dangerous){
+        if ((mo instanceof Enemy || mo instanceof Endboss || mo instanceof EnemyTwo) && !mo.enemytype.dangerous && this.energy > 0){
             this.lastHitTyp = 'poisen';
             
-        } else {
+        } else if ((mo instanceof Enemy || mo instanceof Endboss || mo instanceof EnemyTwo) && mo.enemytype.dangerous && this.energy > 0) {
             this.lastHitTyp = 'elektro';
         }
     }
