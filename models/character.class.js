@@ -73,11 +73,7 @@ class Character extends CharacterImgSet{
          */
         this.setStoppableInterval(() => {
             if (this.isDead()) { 
-                if (this.count !== this.IMAGES_DEAD_POISEN.length-1 && this.energy == 0 && this.lastHitTyp == 'poisen') {          
-                    this.animateDeadPoisen();   
-                } else if (this.count !== this.IMAGES_DEAD_ELEKTRO.length-1 && this.energy == 0 && this.lastHitTyp == 'elektro') {
-                    this.animateDeadElektro();
-                }  
+                this.chooseDeadAnimation();
             } else if (this.world.keyboard.space) { 
                 this.finAttack();
             } else if (this.world.keyboard.d) {
@@ -104,6 +100,17 @@ class Character extends CharacterImgSet{
                 this.idleAnimation(this.IMAGES_LONG_IDLELOOP)
             }
         }, 250);            
+    }
+
+    /**
+     * check which enemy last hit the char and choose the depending deadth animation
+     */
+    chooseDeadAnimation() {
+        if (this.count !== this.IMAGES_DEAD_POISEN.length-1 && this.energy == 0 && this.lastHitTyp == 'poisen') {          
+            this.animateDeadPoisen();   
+        } else if (this.count !== this.IMAGES_DEAD_ELEKTRO.length-1 && this.energy == 0 && this.lastHitTyp == 'elektro') {
+            this.animateDeadElektro();
+        } 
     }
 
     /**
