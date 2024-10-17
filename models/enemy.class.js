@@ -33,7 +33,8 @@ class Enemy extends MoveableObject {
         IMAGES_DEATH : [
             'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 1 (can animate by going up).png',
             'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 2 (can animate by going down to the floor after the Fin Slap attack).png'
-        ]
+        ],
+        dangerous: false,
     }
 
     type2 = {
@@ -65,7 +66,8 @@ class Enemy extends MoveableObject {
         IMAGES_DEATH : [
             'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.png',
             'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/2.3.png'
-        ]
+        ],
+        dangerous: false,
     }
 
     type3 = {
@@ -97,7 +99,8 @@ class Enemy extends MoveableObject {
         IMAGES_DEATH : [
             'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.png',
             'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/3.3.png'
-        ]
+        ],
+        dangerous: false,
     }
     
     enemytype;    

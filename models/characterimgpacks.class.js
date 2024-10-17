@@ -36,6 +36,19 @@ class CharacterImgSet extends MoveableObject {
         'img/1.Sharkie/6.dead/1.Poisoned/12.png'
     ];
 
+    IMAGES_DEAD_ELEKTRO = [
+        'img/1.Sharkie/6.dead/2.Electro_shock/1.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/2.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/3.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/4.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/5.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/6.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/7.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/8.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/9.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/10.png',
+    ];
+
     IMAGES_HIT_POISEN = [
         'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
@@ -118,6 +131,7 @@ class CharacterImgSet extends MoveableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLELOOP);
-        this.loadImages(this.IMAGES_HIT_ELEKTRO);       
+        this.loadImages(this.IMAGES_HIT_ELEKTRO); 
+        this.loadImages(this.IMAGES_DEAD_ELEKTRO);        
     }
 }

@@ -89,14 +89,30 @@ class MoveableObject extends DrawableObject{
 
     /**
      * reduce energy by 10 , set it to 0 when engergy get below 0 and set lastHit current time 
+     * 
+     * @param {string} mo -value from object
      */
-    hit() {
+    hit(mo) {
       this.energy -= 10;
       if (this.energy < 0) {
           this.energy = 0;
       } else {
           this.lastHit =  new Date().getTime();
       }
+    }
+
+    /**
+     * set lastHitTyp in charclass to know which typ enemy hit last
+     * 
+     * @param {string} mo -value from object
+     */
+    setlastHitTyp(mo) {
+        if ((mo instanceof Enemy || mo instanceof Endboss || mo instanceof EnemyTwo) && !mo.enemytype.dangerous){
+            this.lastHitTyp = 'poisen';
+            
+        } else {
+            this.lastHitTyp = 'elektro';
+        }
     }
 
     /**

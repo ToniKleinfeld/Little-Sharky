@@ -85,7 +85,8 @@ class World {
      * @param {string} mo- value from object
      */
     getHitedByEnemy(mo) {
-        this.character.hit();
+        this.character.hit(mo);
+        this.character.setlastHitTyp(mo);
         this.statusBar.setPrecentage(this.character.energy);
         if (this.character.energy > 0 && mo.energy > 0) {
            mo.contactToCharacter = true

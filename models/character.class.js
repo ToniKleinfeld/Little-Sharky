@@ -6,6 +6,7 @@ class Character extends CharacterImgSet{
     width = 200;
     count = 0;
     timeCount = Date.now();
+    lastHitTyp;
 
     world;
 
@@ -73,7 +74,7 @@ class Character extends CharacterImgSet{
         this.setStoppableInterval(() => {
             if (this.isDead()) { 
                 if (this.count !== this.IMAGES_DEAD_POISEN.length-1 && this.energy == 0) {          
-                    this.animateDead();   
+                    this.animateDeadPoisen();   
                 }   
             } else if (this.world.keyboard.space) { 
                 this.finAttack();
@@ -159,9 +160,17 @@ class Character extends CharacterImgSet{
     /**
      * Play the Death animation 
      */
-    animateDead() {
+    animateDeadPoisen() {
         this.count++;
         this.playAnimationOnes(this.IMAGES_DEAD_POISEN);   
+    }
+
+    /**
+    * Play the Death animation 
+    */
+    animateDeadElektro() {
+        this.count++;
+        this.playAnimationOnes(this.IMAGES_DEAD_ELEKTRO);   
     }
 
     /**
@@ -217,7 +226,7 @@ class Character extends CharacterImgSet{
      * @param {string} enemy - current Enemy from enemies Array
      */
     selectHitAnimation(enemy) {
-        if((enemy instanceof Enemy || enemy instanceof Endboss) && this.isHurt() && this.world.character.isColliding(enemy) || enemy instanceof EnemyTwo && this.isHurt() && this.world.character.isColliding(enemy) && !enemy.enemytype.dangerous){
+        if((enemy instanceof Enemy || enemy instanceof Endboss || enemy instanceof EnemyTwo ) && this.isHurt() && this.world.character.isColliding(enemy) && !enemy.enemytype.dangerous){
             this.animateHitPoisen();
             this.moveWhenGetHited();            
          } else if (enemy instanceof EnemyTwo && this.isHurt() && this.world.character.isColliding(enemy) && enemy.enemytype.dangerous) {
