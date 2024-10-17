@@ -73,9 +73,11 @@ class Character extends CharacterImgSet{
          */
         this.setStoppableInterval(() => {
             if (this.isDead()) { 
-                if (this.count !== this.IMAGES_DEAD_POISEN.length-1 && this.energy == 0) {          
+                if (this.count !== this.IMAGES_DEAD_POISEN.length-1 && this.energy == 0 && this.lastHitTyp == 'poisen') {          
                     this.animateDeadPoisen();   
-                }   
+                } else if (this.count !== this.IMAGES_DEAD_ELEKTRO.length-1 && this.energy == 0 && this.lastHitTyp == 'elektro') {
+                    this.animateDeadElektro();
+                }  
             } else if (this.world.keyboard.space) { 
                 this.finAttack();
             } else if (this.world.keyboard.d) {
