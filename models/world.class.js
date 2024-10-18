@@ -108,7 +108,7 @@ class World {
         enemy.energy = 0;
         setTimeout(() => {
             bubble.deleteTrowableobject();
-        }, 50)
+        }, 30)
     }
 
     /**
@@ -123,7 +123,7 @@ class World {
         }   
         setTimeout(() => {
             bubble.deleteTrowableobject();
-        }, 50);
+        }, 30);
     }
 
     /**
@@ -146,10 +146,14 @@ class World {
      * check if keyboad d is pressed and the character still allive , to create a bubble object to the array depending on wich direction the char is swimming
      */
     checkTrowableObjects() {
-        if (this.character.energy > 0 && this.keyboard.d ) {
-            let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection);
+        if (this.character.energy > 0 && this.keyboard.d && (this.character.x < 3150 || this.poisonStatusBar.precentage == 0) ) {
+            let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection ,'neutral');
+            this.throwableObject.push(bubble);
+        } else if (this.character.energy > 0 && this.keyboard.d && this.character.x > 3150 && this.poisonStatusBar.precentage > 0) {
+            let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection ,'poisen');
             this.throwableObject.push(bubble);
         }
+        console.log(this.throwableObject[0].bubbleTyp.typ)
     }
 
     /**

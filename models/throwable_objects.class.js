@@ -1,10 +1,22 @@
 class ThrowableObjects extends MoveableObject {
 
     speedX = 20;
-    startX;
+    startX;   
 
-    constructor(x,y,direction){
-        super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
+    neutral = {
+        typ : 'neutral',
+        pic : ['img/1.Sharkie/4.Attack/Bubble trap/Bubble.png']
+    }
+
+    poisen = {
+        typ : 'poisen',
+        pic : ['img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png']
+    }
+
+    bubbleTyp;
+
+    constructor(x,y,direction,typ){
+        super().loadImage(this.checkType(typ).pic);
         this.width = 40;
         this.height = 40;
         this.y = y + 85;
@@ -12,7 +24,6 @@ class ThrowableObjects extends MoveableObject {
         this.trow(direction)
         this.startX = this.x
     }
-
 
     /**
      * repead check if an trowable object is in array and move it to left or right depending on param direction
@@ -66,5 +77,15 @@ class ThrowableObjects extends MoveableObject {
     deleteTrowableobject() {
         this.stopIntervall(this.intervalIds[0])
         world.throwableObject.splice(0,1);     
+    }
+
+    checkType(typ) {
+        if (typ == 'neutral') {
+            this.bubbleTyp = this.neutral
+            return this.neutral
+        } else if(typ == 'poisen'){
+            this.bubbleTyp = this.poisen
+            return this.poisen
+        }
     }
 }

@@ -8,7 +8,7 @@ class PoisonStatusBar extends DrawableObject{
         'img/4. Marcadores/Purple/100_.png'        
     ];
 
-    precentage = 100;
+    precentage;
 
     constructor() {
         super();
@@ -17,7 +17,7 @@ class PoisonStatusBar extends DrawableObject{
         this.y = 65;
         this.height = 50;
         this.width = 180;
-        this.setPrecentage(100);
+        this.setPrecentage(10);
     }
 
     /**
