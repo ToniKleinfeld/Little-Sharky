@@ -250,9 +250,9 @@ class Character extends CharacterImgSet{
     */
     moveWhenGetHited() {
         if (this.otherDirection && this.x + 0.5 < (3975)) {
-            this.x = this.x + 0.5
+            this.x = this.x + 0.7
         } else if(this.x - 0.5 > (-718)){
-            this.x = this.x - 0.5
+            this.x = this.x - 0.7
         }
         this.timeCount = Date.now();
     }
