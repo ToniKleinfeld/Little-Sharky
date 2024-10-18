@@ -1,7 +1,8 @@
 class Endboss extends MoveableObject {
 
     height = 320;
-    width = 350;    
+    width = 350;
+    count = 0;    
 
     type1 = {
         IMAGES_FLOATING : [
@@ -31,6 +32,28 @@ class Endboss extends MoveableObject {
             'img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
             'img/2.Enemy/3 Final Enemy/1.Introduce/10.png',
         ],
+        IMAGES_HIT : [
+            'img/2.Enemy/3 Final Enemy/Hurt/1.png',
+            'img/2.Enemy/3 Final Enemy/Hurt/2.png',
+            'img/2.Enemy/3 Final Enemy/Hurt/3.png',
+            'img/2.Enemy/3 Final Enemy/Hurt/4.png',
+        ],
+        IMAGES_DEAD : [
+            'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2.png',
+            'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
+            'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
+            'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
+            'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
+            'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png',
+        ],
+        IMAGES_ATTACK : [
+            'img/2.Enemy/3 Final Enemy/Attack/1.png',
+            'img/2.Enemy/3 Final Enemy/Attack/2.png',
+            'img/2.Enemy/3 Final Enemy/Attack/3.png',
+            'img/2.Enemy/3 Final Enemy/Attack/4.png',
+            'img/2.Enemy/3 Final Enemy/Attack/5.png',
+            'img/2.Enemy/3 Final Enemy/Attack/6.png',
+        ],
         dangerous: false,
     }
 
@@ -49,6 +72,9 @@ class Endboss extends MoveableObject {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png')
         this.loadImages(this.enemytype.IMAGES_SPAWN);
         this.loadImages(this.enemytype.IMAGES_FLOATING);
+        this.loadImages(this.enemytype.IMAGES_HIT);
+        this.loadImages(this.enemytype.IMAGES_DEAD);
+        this.loadImages(this.enemytype.IMAGES_ATTACK);
 
         this.x = 3800;
         this.y = 0;
@@ -69,11 +95,30 @@ class Endboss extends MoveableObject {
            this.firstContactBoss();
             if (this.spawnAnimation < 10) {
                 this.playAnimation(this.enemytype.IMAGES_SPAWN)            
+            } else if (this.isDead()) {
+                this.die();
+            } else if (this.isHurt()) {
+                this.getHit();
+            }else if (this.contactToCharacter) {
+                this.collidewithChar()
             } else if (this.firstContact) {
                 this.playAnimation(this.enemytype.IMAGES_FLOATING); 
             }
+            
         this.spawnAnimation++
         }, 150);   
+    }
+
+    /**
+     * play the death animation
+     */
+    die() {
+        this.playAnimationOnes(this.enemytype.IMAGES_DEAD)
+        this.count++
+
+        if (this.count == this.enemytype.IMAGES_DEAD.length) {
+            this.count = 5;
+        }
     }
 
     /**
@@ -85,4 +130,42 @@ class Endboss extends MoveableObject {
             this.spawnAnimation = 0;                        
         }   
     } 
+
+    /**
+     * play the hit animation
+     */
+    getHit(){
+        this.playAnimationOnes(this.enemytype.IMAGES_HIT)
+        this.count++
+
+        if (this.count == this.enemytype.IMAGES_HIT.length) {
+                this.count = 0;  
+        }
+    }
+
+    /**
+     * reduce energy by 25 , set it to 0 when engergy get below 0 and set lastHit current time 
+     * 
+     */
+    hit() {
+        this.energy -= 25;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit =  new Date().getTime();
+        }
+    }
+
+    /**
+     * play attack animation an reset contactToCharacter to false after it show all images
+     */
+    collidewithChar(){
+        this.playAnimationOnes(this.enemytype.IMAGES_ATTACK)
+        this.count++
+    
+        if (this.count == this.enemytype.IMAGES_ATTACK.length) {
+                this.count = 0; 
+                this.contactToCharacter = false;                 
+        }
+    }
 }

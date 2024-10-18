@@ -91,10 +91,26 @@ class World {
                     } else if (bubble.isColliding(enemy) && enemy instanceof Enemy && enemy.energy > 0) {
                         this.bubbleHitPufferFish(enemy,bubble);
                     } else if(bubble.isColliding(enemy) && enemy instanceof Endboss && enemy.energy > 0){
-                        // Hier noch später boss hint mit gift bubble in verindung!
+                        this.bubbleHitEndboss(enemy,bubble);
                     };
                 });
             });
+        }
+    }
+
+    /**
+     * call functions, what happen , when bubble hit endboss
+     * 
+     * @param {object} enemy enemy from enemies Array
+     * @param {object} bubble bubble from trowableobject Array
+     */
+    bubbleHitEndboss(enemy,bubble) {
+        if (bubble.bubbleTyp.typ == 'poisen' && !enemy.isHurt()) {
+            enemy.hit();
+            bubble.deleteTrowableobject();
+            console.log(enemy.energy)
+        } else {           
+            bubble.deleteTrowableobject();
         }
     }
 
@@ -133,7 +149,7 @@ class World {
      */
     getHitedByEnemy(mo) {
         if (!this.character.isHurt()) {
-            this.character.hit(mo);
+            this.character.hit();
             this.character.setlastHitTyp(mo);
             this.statusBar.setPrecentage(this.character.energy);
             if (this.character.energy > 0 && mo.energy > 0) {
@@ -153,7 +169,6 @@ class World {
             let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection ,'poisen');
             this.throwableObject.push(bubble);
         }
-        console.log(this.throwableObject[0].bubbleTyp.typ)
     }
 
     /**

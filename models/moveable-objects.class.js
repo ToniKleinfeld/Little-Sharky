@@ -90,9 +90,8 @@ class MoveableObject extends DrawableObject{
     /**
      * reduce energy by 10 , set it to 0 when engergy get below 0 and set lastHit current time 
      * 
-     * @param {string} mo -value from object
      */
-    hit(mo) {
+    hit() {
       this.energy -= 10;
       if (this.energy < 0) {
           this.energy = 0;
