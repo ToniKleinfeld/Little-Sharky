@@ -97,7 +97,7 @@ class EnemyTwo extends MoveableObject {
          */
         this.setStoppableInterval(() => {                         
             if(this.isDead()){
-                trapedInBubble()
+                this.trapedInBubble()
             } else {
                 this.playAnimation(this.enemytype.IMAGES_SWIM);
             }                       
@@ -120,7 +120,7 @@ class EnemyTwo extends MoveableObject {
         this.playAnimationOnes(this.enemytype.IMAGES_DEATH);
         this.count++;
 
-        if (this.count == this.enemytype.IMAGES_BLOW_UP.length) { 
+        if (this.count == this.enemytype.IMAGES_DEATH.length) { 
             this.count = 0;                                             
         } 
     }

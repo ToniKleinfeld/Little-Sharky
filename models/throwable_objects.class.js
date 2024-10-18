@@ -22,7 +22,7 @@ class ThrowableObjects extends MoveableObject {
     trow(direction) {        
         this.setStoppableInterval(() => {
             this.checkTrwowAbleObjectDirection(direction);            
-        },10);
+        },10); 
     }
 
     /**
@@ -59,8 +59,12 @@ class ThrowableObjects extends MoveableObject {
      */
     checkMovedDistance() {
         if (this.startX + 400 == this.x || this.startX - 400 == this.x) {  
-            this.stopIntervall(this.intervalIds[0])
-            world.throwableObject.splice(0,1);                                   
+         this.deleteTrowableobject()                     
         }
+    }
+
+    deleteTrowableobject() {
+        this.stopIntervall(this.intervalIds[0])
+        world.throwableObject.splice(0,1);     
     }
 }

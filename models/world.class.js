@@ -33,6 +33,7 @@ class World {
     run() {
         this.character.setStoppableInterval(() => {            
             this.checkCollisions();
+            this.checkCollisionsTrowableObjects();
             this.playBackgroundMusic();         
         },100 / 60);
     }
@@ -69,14 +70,60 @@ class World {
      */
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if ( this.character.isColliding(enemy) && !this.character.isHurt() && !this.keyboard.space && enemy.energy > 0) {
-                this.getHitedByEnemy(enemy);                 
+            if ( this.character.isColliding(enemy) && (!this.keyboard.space || enemy instanceof EnemyTwo || enemy instanceof Endboss) && enemy.energy > 0 && !this.character.isDead()) {
+                this.getHitedByEnemy(enemy);
+                this.character.selectHitAnimation(enemy);             
             } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy)) {
                 enemy.energy = 0;  
-            }            
-            this.character.selectHitAnimation(enemy);            
-            
+            } 
          })
+    }
+
+    /**
+     * Check if a trowableObject collide with a enemy and call following functio , when yes
+     */
+    checkCollisionsTrowableObjects() {
+        if(this.throwableObject.length != 0) {
+            this.throwableObject.forEach((bubble) => {
+                this.level.enemies.forEach((enemy) => {
+                    if (bubble.isColliding(enemy) && enemy instanceof EnemyTwo && enemy.energy > 0) {
+                        this.bubbleHitJelly(enemy,bubble);
+                    } else if (bubble.isColliding(enemy) && enemy instanceof Enemy && enemy.energy > 0) {
+                        this.bubbleHitPufferFish(enemy,bubble);
+                    } else if(bubble.isColliding(enemy) && enemy instanceof Endboss && enemy.energy > 0){
+                        // Hier noch später boss hint mit gift bubble in verindung!
+                    };
+                });
+            });
+        }
+    }
+
+     /**
+     * Call functions to animate what happen , when a bubble hit a jelly
+     * 
+     * @param {object} enemy enemy from enemies Array
+     * @param {object} bubble bubble from trowableobject Array
+     */
+    bubbleHitJelly(enemy,bubble) {
+        enemy.energy = 0;
+        setTimeout(() => {
+            bubble.deleteTrowableobject();
+        }, 50)
+    }
+
+    /**
+     * Call functions to animate what happen , when a bubble hit a Pufferfish
+     * 
+     * @param {object} enemy enemy from enemies Array
+     *    * @param {object} bubble bubble from trowableobject Array
+     */
+    bubbleHitPufferFish(enemy,bubble) {
+        if (!enemy.checkTimeInBlowUp()) {
+            enemy.collideWithCharacter();
+        }   
+        setTimeout(() => {
+            bubble.deleteTrowableobject();
+        }, 50);
     }
 
     /**
@@ -85,11 +132,13 @@ class World {
      * @param {string} mo- value from object
      */
     getHitedByEnemy(mo) {
-        this.character.hit(mo);
-        this.character.setlastHitTyp(mo);
-        this.statusBar.setPrecentage(this.character.energy);
-        if (this.character.energy > 0 && mo.energy > 0) {
-           mo.contactToCharacter = true
+        if (!this.character.isHurt()) {
+            this.character.hit(mo);
+            this.character.setlastHitTyp(mo);
+            this.statusBar.setPrecentage(this.character.energy);
+            if (this.character.energy > 0 && mo.energy > 0) {
+               mo.contactToCharacter = true
+            }
         }
     }
 
