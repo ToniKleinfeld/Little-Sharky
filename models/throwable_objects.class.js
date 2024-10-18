@@ -66,7 +66,7 @@ class ThrowableObjects extends MoveableObject {
     }
 
     /**
-     * check how far the bubble object is moved from startposition and splice is out of array after 400px and stop the call intervall
+     * check how far the bubble object is moved from startposition 
      */
     checkMovedDistance() {
         if (this.startX + 400 == this.x || this.startX - 400 == this.x) {  
@@ -74,11 +74,20 @@ class ThrowableObjects extends MoveableObject {
         }
     }
 
+    /**
+     * splice the bubble out of array after 400px and stop the call intervall
+     */
     deleteTrowableobject() {
         this.stopIntervall(this.intervalIds[0])
         world.throwableObject.splice(0,1);     
     }
 
+    /**
+     * set the typ of bubble when creating it
+     * 
+     * @param {string} typ - contains 'neutral' or 'poisen'
+     * @returns typ , to get image of wanted bubble pic
+     */
     checkType(typ) {
         if (typ == 'neutral') {
             this.bubbleTyp = this.neutral
