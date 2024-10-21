@@ -17,7 +17,7 @@ class PoisonStatusBar extends DrawableObject{
         this.y = 65;
         this.height = 50;
         this.width = 180;
-        this.setPrecentage(10);
+        this.setPrecentage(0);
     }
 
     /**

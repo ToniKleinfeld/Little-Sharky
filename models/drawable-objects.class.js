@@ -50,7 +50,7 @@ class DrawableObject {
      * @param {string} ctx - value for add images to the canvas
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof EnemyTwo) { 
+        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof EnemyTwo || this instanceof Coin) { 
         ctx.beginPath();
         ctx.lineWidth = '5';
         ctx.strokeStyle = 'blue';

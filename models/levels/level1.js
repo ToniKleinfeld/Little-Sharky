@@ -56,7 +56,21 @@ function InitLevel() {
         ],
         [
             new Audio('audio/levelsound.mp3'),
-        ]
+        ],
+        [
+            new Coin(10,30),
+            new Coin(150,70),
+            new Coin(50,60),
+            new Coin(80,20),
+            new Coin(250,90),
+        ],
+        [
+            new Poisenbottle(10,130,'dark'),
+            new Poisenbottle(150,170,'dark'),
+            new Poisenbottle(50,160,'dark'),
+            new Poisenbottle(80,120,'dark'),
+            new Poisenbottle(250,190,'dark'),
+        ],
     )
 }
 
