@@ -8,7 +8,7 @@ class PoisonStatusBar extends DrawableObject{
         'img/4. Marcadores/Purple/100_.png'        
     ];
 
-    precentage;
+    precentage = 0;
 
     constructor() {
         super();
@@ -17,7 +17,18 @@ class PoisonStatusBar extends DrawableObject{
         this.y = 65;
         this.height = 50;
         this.width = 180;
-        this.setPrecentage(0);
+        this.setPrecentage(this.precentage);
+        this.checkStatus();
+    }
+
+    /**
+     * Show the current state of Poisen
+     */
+    checkStatus() {
+        setInterval(() => {            
+            this.checkCurrentPrecentageMax();
+            this.loadImage(this.IMAGES_POISEN[this.resolveImageIndex()]);
+        }, 150);
     }
 
     /**
@@ -28,7 +39,7 @@ class PoisonStatusBar extends DrawableObject{
     setPrecentage(precentage) {
         this.precentage = precentage;
         let path = this.IMAGES_POISEN[this.resolveImageIndex()]
-        this.img = this.imageCache[path]
+        this.img = this.imageCache[path]       
     }
     
     /**

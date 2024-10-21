@@ -3,21 +3,18 @@ class Poisenbottle extends MoveableObject {
     height = 60;
     width = 60;
 
-    dark = {
+    typ = {
         IMGAGE : [
-           'img/4. Marcadores/Posión/Dark - Left.png',
-           'img/4. Marcadores/Posión/Dark - Right.png',          
+           'img/4. Marcadores/Posión/Animada/1.png',
+           'img/4. Marcadores/Posión/Animada/2.png',    
+           'img/4. Marcadores/Posión/Animada/3.png',
+           'img/4. Marcadores/Posión/Animada/4.png',
+           'img/4. Marcadores/Posión/Animada/5.png',
+           'img/4. Marcadores/Posión/Animada/6.png',
+           'img/4. Marcadores/Posión/Animada/7.png',
+           'img/4. Marcadores/Posión/Animada/8.png',          
         ]
     };
-
-    light = {
-        IMGAGE : [
-           'img/4. Marcadores/Posión/Light - Left.png',
-           'img/4. Marcadores/Posión/Light - Right.png',          
-        ]
-    };
-
-    typ = this.dark;
        
     offset = {
         top:0,
@@ -26,8 +23,8 @@ class Poisenbottle extends MoveableObject {
         bottom:0
     };     
 
-    constructor(x,y,typ) {
-        super().loadImage(this.setTyp(typ).IMGAGE[0]);
+    constructor(x,y) {
+        super().loadImage(this.typ.IMGAGE[0]);
         this.loadImages(this.typ.IMGAGE);
 
         this.x = x;
@@ -37,27 +34,11 @@ class Poisenbottle extends MoveableObject {
     }
 
     /**
-     * Play the Animation intetvall vor coin
+     * Play the Animation intetvall for coins
      */
     animate() {
         this.setStoppableInterval(() => {
             this.playAnimation(this.typ.IMGAGE)
-        },750)
-    }
-
-    /**
-     * Get the type for level design
-     * 
-     * @param {string} typ - get string from level 
-     * @returns typ
-     */
-    setTyp(typ) {
-        if (typ == 'dark' ) {
-            this.typ = this.dark;
-            return this.dark
-        } else if(typ == 'light') {
-            this.typ = this.light;
-            return this.light
-        }
+        },150)
     }
 }

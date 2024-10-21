@@ -8,7 +8,7 @@ class CoinStatusBar extends DrawableObject{
         'img/4. Marcadores/Purple/100__1.png'        
     ];
 
-    precentage = 100;
+    precentage = 0;
 
     constructor() {
         super();
@@ -17,7 +17,18 @@ class CoinStatusBar extends DrawableObject{
         this.y = 30;
         this.height = 50;
         this.width = 180;
-        this.setPrecentage(0);
+        this.setPrecentage(this.precentage);
+        this.checkStatus()
+    }
+
+    /**
+     * Show the current state of Coins
+     */
+    checkStatus() {
+        setInterval(() => {            
+            this.checkCurrentPrecentageMax();
+            this.loadImage(this.IMAGES_COIN[this.resolveImageIndex()]);
+        }, 150);
     }
 
     /**
@@ -51,6 +62,5 @@ class CoinStatusBar extends DrawableObject{
         } else {
             return 0;
         }
-    } 
-
+    }
 }

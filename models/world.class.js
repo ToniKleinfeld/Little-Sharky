@@ -34,6 +34,8 @@ class World {
         this.character.setStoppableInterval(() => {            
             this.checkCollisions();
             this.checkCollisionsTrowableObjects();
+            this.checkCollisionsForItems('Coin');
+            this.checkCollisionsForItems('Poisenbottle');
             this.playBackgroundMusic();         
         },100 / 60);
     }
@@ -49,11 +51,11 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects); 
         this.addObjectsToMap(this.level.light); 
         this.addObjectsToMap(this.level.backgroundfloor);    
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObject)
-        this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.character);        
         this.addObjectsToMap(this.level.coins); 
-        this.addObjectsToMap(this.level.poisen);           
+        this.addObjectsToMap(this.level.poisen); 
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObject);          
 
         this.ctx.translate(-this.camera_x,0);
 
@@ -79,6 +81,50 @@ class World {
                 enemy.energy = 0;  
             } 
          })
+    }
+
+    /**
+     * Check if Character colide with item , and collect it / slice it out of array
+     * 
+     * @param {string} item - Value , which array should be checked
+     */
+    checkCollisionsForItems(item) {        
+        this.selectItem(item).forEach((object,index) => {            
+            if (this.character.isColliding(object)) {                
+                if (object instanceof Coin || object instanceof Poisenbottle) {
+                    this.selectStatusbar(item).precentage += 10; 
+                    this.selectItem(item).splice(index,1);
+                }                                              
+            }
+        })
+    }
+
+    /**
+     * give back the array path
+     * 
+      @param {string} item - Value , which array should be checked
+     * @returns path to Choosen Array
+     */
+    selectItem(item) {
+        if (item == 'Coin') {
+            return this.level.coins
+        } else if(item == 'Poisenbottle') {
+            return this.level.poisen
+        }
+    }
+
+    /**
+     * give back the Statusbar path
+     * 
+      @param {string} item - Value , which array should be checked
+     * @returns path to Choosen Statusbar
+     */
+    selectStatusbar(item) {
+        if (item == 'Coin') {
+            return this.coinStatusBar
+        } else if(item == 'Poisenbottle') {
+            return this.poisonStatusBar
+        }
     }
 
     /**

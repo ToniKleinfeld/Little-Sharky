@@ -65,11 +65,11 @@ function InitLevel() {
             new Coin(250,90),
         ],
         [
-            new Poisenbottle(10,130,'dark'),
-            new Poisenbottle(150,170,'dark'),
-            new Poisenbottle(50,160,'dark'),
-            new Poisenbottle(80,120,'dark'),
-            new Poisenbottle(250,190,'dark'),
+            new Poisenbottle(10,130),
+            new Poisenbottle(150,170),
+            new Poisenbottle(50,160),
+            new Poisenbottle(80,120),
+            new Poisenbottle(250,190),
         ],
     )
 }

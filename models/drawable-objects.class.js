@@ -73,4 +73,13 @@ class DrawableObject {
             ctx.stroke();
             }
     }
+
+    /**
+     * Check if precentage go above 100 , reset on 100 when yes
+     */
+    checkCurrentPrecentageMax() {
+        if(this.precentage > 100) {
+            this.precentage = 100
+        }
+    }
 }
