@@ -95,3 +95,22 @@ function stopMusic() {
         world.backgroundmusic.pause()
     }
 }
+
+/**
+ * function to toogle button and mute unmute sounds
+ */
+function muteGame() {
+    const img = document.getElementById('mute');
+    img.classList.toggle('mute');
+    img.classList.toggle('nomute');
+}
+
+/**
+ * toggle between fullscreen and window screen
+ */
+function changeSize() {
+    const img = document.getElementById('fullscreen');
+    img.classList.toggle('smallscreen');
+    img.classList.toggle('fullscreen');
+
+}
