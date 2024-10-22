@@ -9,7 +9,6 @@ class World {
     coinStatusBar = new CoinStatusBar();
     poisonStatusBar = new PoisonStatusBar();
     throwableObject = [];
-    UserInteractWithSideforSounds = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -275,8 +274,6 @@ class World {
      * Play backgroundmusic , when user interactet with webside
      */
     playBackgroundMusic() {
-        if (this.UserInteractWithSideforSounds) {
-            this.level.backgroundmusic[0].play();  
-        } 
+        this.level.backgroundmusic[0].play();  
     }
 }

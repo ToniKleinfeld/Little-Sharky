@@ -14,12 +14,13 @@ canvas {
 .canvascontainer {
     position: relative;
     display: block;
-    border-radius: 20px;   
+    border-radius: 20px; 
+    overflow: hidden;  
 }
 
 .pannel {
     position: absolute;
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     bottom: 0;
@@ -116,6 +117,20 @@ h1 {
     text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);    
 }
 
+.d-none {
+    display: none;
+}
+
+/* .start-screen-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+} */
+
 @media (max-height:619px) {
     h1 {
         display: none;
@@ -133,3 +148,9 @@ h1 {
         height: calc(100dvh - 6px)
     }
 }
+
+@media (hover: none) { 
+    .pannel {
+        display: flex;
+    }
+ }

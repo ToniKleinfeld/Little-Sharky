@@ -2,10 +2,24 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-function init() {
+/**
+ * load, the startscreen , when dom is loaded
+ */
+function init() {    
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new StartScreen(canvas, keyboard)
+    document.getElementById('canvas').addEventListener("click", function(){startSound();});
+    document.getElementById('canvas').addEventListener("touchstart",function(){startSound();});
+}
 
+/**
+ * Start the game , change the world from startscreen to world
+ */
+function startGame() {
+    stopMusic();
+    canvas = document.getElementById('canvas');
+    InitLevel(); // load level 1 <-- use later for start button when overlay designed
+    world = new World(canvas, keyboard);
 }
 
 document.addEventListener('keydown', (e) => {   
@@ -65,4 +79,19 @@ document.addEventListener('touchend', (e) => {
     }
 })
 
-InitLevel() // load level 1 <-- use later for start button when overlay designed
+/**
+ * set value to true when click on canvas ,to start background music
+ */
+function startSound() {
+    world.UserInteractWithSideforSounds = true;
+}
+
+/**
+ * Stop the backgroundmusic from Startscreen
+ */
+function stopMusic() {
+    if (world.UserInteractWithSideforSounds == !undefined) {
+        world.UserInteractWithSideforSounds = false;
+        world.backgroundmusic.pause()
+    }
+}

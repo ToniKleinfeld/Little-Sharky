@@ -47,7 +47,6 @@ class Character extends CharacterImgSet{
                this.swimRight();
                this.otherDirection = false;
                this.swim_sound.play();
-               this.world.UserInteractWithSideforSounds = true; // später auf den play Button binden!
             } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space && !this.world.keyboard.d ) {
                this.swimLeft();
                this.otherDirection = true;
