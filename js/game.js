@@ -7,9 +7,23 @@ let keyboard = new Keyboard();
  */
 function init() {    
     canvas = document.getElementById('canvas');
-    world = new StartScreen(canvas, keyboard)
-    document.getElementById('canvas').addEventListener("click", function(){startSound();});
-    document.getElementById('canvas').addEventListener("touchstart",function(){startSound();});
+    world = new StartScreen(canvas)
+    addEventListenerFunctions(canvas)
+}
+
+/**
+ * function , where all eventlistener are collectet
+ * 
+ * @param {string} canvas - path of the cancas
+ */
+function addEventListenerFunctions(canvas) {
+    canvas.addEventListener("click", function(){startSound();});
+    canvas.addEventListener("touchstart",function(){startSound();});
+    document.addEventListener('keydown', function(){  
+        if (world instanceof StartScreen) {
+            startGame();
+        }
+    });
 }
 
 /**
