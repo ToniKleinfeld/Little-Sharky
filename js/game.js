@@ -24,6 +24,11 @@ function addEventListenerFunctions(canvas) {
             startGame();
         }
     });
+    document.addEventListener('touchstart', function(){  
+        if (world instanceof StartScreen) {
+            startGame();
+        }
+    });
 }
 
 /**
