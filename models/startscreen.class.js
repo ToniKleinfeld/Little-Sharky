@@ -85,12 +85,12 @@ class StartScreen{
         this.ctx.strokeText('Move Sharky',15,110);
 
 
-        this.ctx.fillText('Attack with fin,',440,95);
-        this.ctx.strokeText('Attack with fin,',440,95);
+        this.ctx.fillText('Attack with fin',440,95);
+        this.ctx.strokeText('Attack with fin',440,95);
 
 
-        this.ctx.fillText('Bubble Attack.',220,100);
-        this.ctx.strokeText('Bubble Attack.',220,100);
+        this.ctx.fillText('Bubble Attack',220,100);
+        this.ctx.strokeText('Bubble Attack',220,100);
 
         this.ctx.fillText('Press any Key to:',445,340);
         this.ctx.strokeText('Press any Key to:',445,340);
