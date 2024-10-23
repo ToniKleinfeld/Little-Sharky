@@ -12,8 +12,6 @@ class StartScreen{
         new Startscreenpics('img/6.Botones/Key/Space Bar key.png', 450, 40 , 140 , 30),
     ];
 
-    
-
     backgroundmusic = new Audio('audio/levelsound.mp3'); 
 
     constructor(canvas){
@@ -29,8 +27,15 @@ class StartScreen{
     draw() {
         this.ctx.clearRect(0,0, this.canvas.width , this.canvas.height); 
 
+        this.ctx.shadowColor = "grey";
+        this.ctx.shadowOffsetX = 3;
+        this.ctx.shadowOffsetY = 5;
+
         this.addObjectsToMap(this.pics); 
         this.setTextForKeyboard()
+
+        this.ctx.shadowOffsetX = 0;
+        this.ctx.shadowOffsetY = 0;
 
         let self = this;
         requestAnimationFrame(function() {
@@ -81,19 +86,15 @@ class StartScreen{
         this.ctx.strokeStyle = grad;
         this.ctx.fillStyle = 'white';
 
-        this.ctx.fillText('Move Sharky',15,110);
         this.ctx.strokeText('Move Sharky',15,110);
-
-
-        this.ctx.fillText('Attack with fin',440,95);
         this.ctx.strokeText('Attack with fin',440,95);
-
-
-        this.ctx.fillText('Bubble Attack',220,100);
         this.ctx.strokeText('Bubble Attack',220,100);
-
-        this.ctx.fillText('Press any Key to:',445,340);
         this.ctx.strokeText('Press any Key to:',445,340);
+
+        this.ctx.fillText('Move Sharky',15,110);
+        this.ctx.fillText('Press any Key to:',445,340);
+        this.ctx.fillText('Attack with fin',440,95);
+        this.ctx.fillText('Bubble Attack',220,100);
     }
 }
 
