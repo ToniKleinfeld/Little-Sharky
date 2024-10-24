@@ -24,6 +24,9 @@ class Sounds{
         this[path][track].audio.playbackRate = this[path][track].playbackspeed;
     }
 
+    /**
+     * push the sound objects with settet volume in the values
+     */
     soundsOn() {
         this.sharky = { 
             swim :  {
@@ -52,6 +55,9 @@ class Sounds{
         }
     }
 
+     /**
+     * push the sound objects with volume zero in the values
+     */
     soundsOff() {
         this.sharky = { 
             swim :  {
