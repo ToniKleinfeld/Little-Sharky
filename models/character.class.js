@@ -33,65 +33,113 @@ class Character extends CharacterImgSet{
          * Play sound for swim or stop them when dead
          * calls the swim function so move the char when an arrow key is pressed
          */
-        this.setStoppableInterval(() => {
-            if (this.isDead()) {
-                this.world.sounds.playSound('sharky','swim','pause');
-            } else if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space && !this.world.keyboard.d) {
-               this.swimRight();
-               this.otherDirection = false;
-               this.world.sounds.playSound('sharky','swim','play');
-            } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space && !this.world.keyboard.d ) {
-               this.swimLeft();
-               this.otherDirection = true;
-               this.world.sounds.playSound('sharky','swim','play');
-            } else if (this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space && !this.world.keyboard.d) {
-                this.swimTop(); 
-                this.world.sounds.playSound('sharky','swim','play');
-            } else if (this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space && !this.world.keyboard.d) {
-                this.swimDown();
-                this.world.sounds.playSound('sharky','swim','play');
-            } else {
-                this.world.sounds.playSound('sharky','swim','pause');
-            }
-
-            this.moveCamera()
-        }, 1000 / 60);
-
+        this.setStoppableInterval(() => {this.moveCharacter();  this.moveCamera();}, 1000 / 60);
 
         /**
          * Check if the Char is dead and play the animation one time 
          * if key for find attack or Bubble attack is pressed and play this animations/sounds and creat a bubble object in world trowable array one time 
          * if no if matched it calls the function to stop and reset the sounds for find/Bubble attack
          */
-        this.setStoppableInterval(() => {
-            if (this.isDead()) { 
-                this.chooseDeadAnimation();
-            } else if (this.world.keyboard.space) { 
-                this.finAttack();
-            } else if (this.world.keyboard.d) {
-                if (this.count == 6) { 
-                    this.world.checkTrowableObjects();
-                }    
-                this.bubbleTrap();           
-            } else {
-                this.resetAndPauseSounds()
-            }
-        }, 60);
+        this.setStoppableInterval(() => this.characterAttacks(), 60);
 
         /**
          * Check which animation should be shown , when press any key or when no key pressed when the idle animation starts and repeat when char is not dead
          */
-        this.setStoppableInterval(() => {    
-         if (this.count == 0 && this.energy > 0 && this.checkIfAnyKeyPressed()) {
-                this.swimAnimation();
-            } else if(!this.isDead() && Date.now() - this.timeCount <= 5000){
-                this.idleAnimation(this.IMAGES_IDLE)
-            } else if(!this.isDead() && Date.now() - this.timeCount <= 7250) {
-                this.idleAnimation(this.IMAGES_LONG_IDLE)
-            } else if(!this.isDead()) {
-                this.idleAnimation(this.IMAGES_LONG_IDLELOOP)
-            }
-        }, 250);            
+        this.setStoppableInterval(() =>  this.idleAnimationIfElse(), 250);            
+    }
+
+    /**
+     * if else , where the char is moving when pressing arrow keys
+     */
+    moveCharacter() {
+        if (this.isDead()) {
+            this.world.sounds.playSound('sharky','swim','pause');
+        } else if (this.canSwimRight()) {
+           this.swimRight();
+           this.otherDirection = false;
+           this.world.sounds.playSound('sharky','swim','play');
+        } else if (this.canSwimLeft()) {
+           this.swimLeft();
+           this.otherDirection = true;
+           this.world.sounds.playSound('sharky','swim','play');
+        } else if (this.canSwimTop()) {
+            this.swimTop(); 
+            this.world.sounds.playSound('sharky','swim','play');
+        } else if (this.canSwimDown()) {
+            this.swimDown();
+            this.world.sounds.playSound('sharky','swim','play');
+        } else {
+            this.world.sounds.playSound('sharky','swim','pause');
+        }
+    }
+
+    /**
+     * Check if char can swim down
+     * 
+     * @returns true or false
+     */
+    canSwimDown() {
+        return this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space && !this.world.keyboard.d
+    }
+
+    /**
+     * check if char can swim top
+     * 
+     * @returns true or false
+     */
+    canSwimTop() {
+        return this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space && !this.world.keyboard.d
+    }
+
+    /**
+     * can the character swim to the left
+     * 
+     * @returns true or false
+     */
+    canSwimLeft() {
+        return this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space && !this.world.keyboard.d 
+    }
+
+    /**
+     * can the character swim to the right
+     * 
+     * @returns true or false
+     */
+    canSwimRight() {
+        return this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space && !this.world.keyboard.d
+    }
+
+    /**
+     * if else which attack is animaten , when pressing d oder space
+     */
+    characterAttacks() {
+        if (this.isDead()) { 
+            this.chooseDeadAnimation();
+        } else if (this.world.keyboard.space) { 
+            this.finAttack();
+        } else if (this.world.keyboard.d) {
+            if (this.count == 6) { 
+                this.world.checkTrowableObjects();
+            }    
+            this.bubbleTrap();           
+        } else {
+            this.resetAndPauseSounds()
+        }
+    }
+
+    /**
+     * if else for which state of idle animation is shown
+     */
+    idleAnimationIfElse() {
+        if (this.count == 0 && this.energy > 0 && this.checkIfAnyKeyPressed()) {
+            this.swimAnimation();
+        } else if(!this.isDead() && Date.now() - this.timeCount <= 5000){
+            this.idleAnimation(this.IMAGES_IDLE)
+        } else if(!this.isDead() && Date.now() - this.timeCount <= 7250) {
+            this.idleAnimation(this.IMAGES_LONG_IDLE)
+        } else if(!this.isDead()) {
+            this.idleAnimation(this.IMAGES_LONG_IDLELOOP)
+        }
     }
 
     /**
