@@ -279,4 +279,11 @@ class World {
     playBackgroundMusic() {
         this.sounds.playSound('backgroundmusic','dark','play') 
     }
+
+    /**
+     * ends all Intervalls
+     */
+    clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
+      }
 }

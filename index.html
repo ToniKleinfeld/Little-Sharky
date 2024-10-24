@@ -36,10 +36,12 @@
 <div class="background">
     <h1>Little Sharky</h1>
 
-    <div class="canvascontainer">
+    <div class="canvascontainer center" id="fullscreencontainer">
+               
         <canvas width="720px" height="480px" id="canvas">
         </canvas>
 
+        
         <div class="fullscreen-mute-buttons-container">
             <div class="fullscreen" id="fullscreen" onclick="changeSize()"></div>
             <div class="nomute" id="mute" onclick="muteGame()"></div>
@@ -62,7 +64,6 @@
                 <button class="playBtn space" id="spaceButton">Space</button>
                 <button class="playBtn d" id="dButton">D</button>
             </div>
-
         </div>
     </div>
     

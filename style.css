@@ -15,7 +15,22 @@ canvas {
     position: relative;
     display: block;
     border-radius: 20px; 
-    overflow: hidden;  
+    overflow: hidden;
+    background-image: url(./img/assets/background.jpeg);
+    background-position: 35% 0% ;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+
+.fullscreencanvas {
+    height: 100dvh;
+    width: 100dvw;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pannel {
