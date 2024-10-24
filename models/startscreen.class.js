@@ -3,6 +3,7 @@ class StartScreen{
     canvas;
     UserInteractWithSideforSounds = false;
     intervall;
+    sounds;
     
     pics = [
         new Startscreenpics('img/3. Background/Mesa de trabajo 1.png', -15, 0, 850, 480),
@@ -12,11 +13,11 @@ class StartScreen{
         new Startscreenpics('img/6.Botones/Key/Space Bar key.png', 450, 40 , 140 , 30),
     ];
 
-    backgroundmusic = new Audio('audio/levelsound.mp3'); 
-
-    constructor(canvas){
+    constructor(canvas,sounds,volumeStatus){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.sounds = sounds;
+        this.volumeStatus = volumeStatus;
         this.draw();
         this.playBackgroundMusic();
     }
@@ -40,7 +41,7 @@ class StartScreen{
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
-        });      
+        }); 
     }
 
     /**
@@ -69,7 +70,7 @@ class StartScreen{
     playBackgroundMusic() {
         this.intervall = setInterval(() => {
             if (this.UserInteractWithSideforSounds) {
-                this.backgroundmusic.play();  
+                this.sounds.playSound('backgroundmusic','dark','play')
             } 
         }, 1000/60);
     }

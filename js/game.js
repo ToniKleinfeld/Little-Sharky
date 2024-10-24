@@ -1,13 +1,15 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let sounds = new Sounds();
+let volumeStatus = 'on';
 
 /**
  * load, the startscreen , when dom is loaded
  */
 function init() {    
     canvas = document.getElementById('canvas');
-    world = new StartScreen(canvas)
+    world = new StartScreen(canvas,sounds,volumeStatus)
     addEventListenerFunctions(canvas)
 }
 
@@ -38,7 +40,7 @@ function startGame() {
     stopMusic();
     canvas = document.getElementById('canvas');
     InitLevel(); // load level 1 <-- use later for start button when overlay designed
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, sounds, volumeStatus);
 }
 
 document.addEventListener('keydown', (e) => {   
@@ -111,7 +113,7 @@ function startSound() {
 function stopMusic() {
     if (world.UserInteractWithSideforSounds == !undefined) {
         world.UserInteractWithSideforSounds = false;
-        world.backgroundmusic.pause()
+        world.sounds.playSound('backgroundmusic','dark','pause') 
     }
 }
 
@@ -122,6 +124,16 @@ function muteGame() {
     const img = document.getElementById('mute');
     img.classList.toggle('mute');
     img.classList.toggle('nomute');
+    world.sounds.playSound('backgroundmusic','dark','pause') 
+
+    if (volumeStatus == 'on') {
+        sounds.soundsOff()
+        volumeStatus = 'off';
+    } else if(volumeStatus == 'off') {
+        sounds.soundsOn();
+        volumeStatus = 'on';
+    }
+    world.sounds.playSound('backgroundmusic','dark','play') 
 }
 
 /**

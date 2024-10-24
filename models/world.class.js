@@ -9,11 +9,14 @@ class World {
     coinStatusBar = new CoinStatusBar();
     poisonStatusBar = new PoisonStatusBar();
     throwableObject = [];
+    sounds;
 
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard,sounds, volumeStatus) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.sounds = sounds;
+        this.volumeStatus = volumeStatus;
         this.draw();
         this.setWorld();
         this.run();
@@ -35,7 +38,7 @@ class World {
             this.checkCollisionsTrowableObjects();
             this.checkCollisionsForItems('Coin');
             this.checkCollisionsForItems('Poisenbottle');
-            this.playBackgroundMusic();         
+            this.playBackgroundMusic();        
         },100 / 60);
     }
 
@@ -274,6 +277,6 @@ class World {
      * Play backgroundmusic , when user interactet with webside
      */
     playBackgroundMusic() {
-        this.level.backgroundmusic[0].play();  
+        this.sounds.playSound('backgroundmusic','dark','play') 
     }
 }

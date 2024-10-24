@@ -15,20 +15,13 @@ class Character extends CharacterImgSet{
         left:30,
         right:30,
         bottom:30
-    };
-
-    swim_sound = new Audio('audio/swim.mp3');
-    bubble_sound = new Audio('audio/blowbubble.mp3');
-    tail_sound = new Audio('audio/tailattack.mp3');
-    
+    };    
 
     constructor() {
         super()
-
         this.x = 10;
         this.y = 200;
         this.speed = this.speed * 80;
-
         this.animate();
     }
 
@@ -42,23 +35,23 @@ class Character extends CharacterImgSet{
          */
         this.setStoppableInterval(() => {
             if (this.isDead()) {
-                this.swim_sound.pause()
+                this.world.sounds.playSound('sharky','swim','pause');
             } else if (this.world.keyboard.right && this.x < this.world.level.level_end_x + 390 && !this.world.keyboard.space && !this.world.keyboard.d) {
                this.swimRight();
                this.otherDirection = false;
-               this.swim_sound.play();
+               this.world.sounds.playSound('sharky','swim','play');
             } else if (this.world.keyboard.left && this.x > -680 && !this.world.keyboard.space && !this.world.keyboard.d ) {
                this.swimLeft();
                this.otherDirection = true;
-               this.swim_sound.play();
+               this.world.sounds.playSound('sharky','swim','play');
             } else if (this.world.keyboard.top && this.y > -70  && !this.world.keyboard.space && !this.world.keyboard.d) {
                 this.swimTop(); 
-                this.swim_sound.play();
+                this.world.sounds.playSound('sharky','swim','play');
             } else if (this.world.keyboard.down && this.y < 330  && !this.world.keyboard.space && !this.world.keyboard.d) {
                 this.swimDown();
-                this.swim_sound.play();
+                this.world.sounds.playSound('sharky','swim','play');
             } else {
-                this.swim_sound.pause()
+                this.world.sounds.playSound('sharky','swim','pause');
             }
 
             this.moveCamera()
@@ -116,10 +109,10 @@ class Character extends CharacterImgSet{
      * set the currentTime of sound to 0 and pause the play from tail/ bubble attack
      */
     resetAndPauseSounds() {
-        this.tail_sound.currentTime = 0;
-        this.tail_sound.pause();
-        this.bubble_sound.currentTime = 0;
-        this.bubble_sound.pause();   
+        this.world.sounds.sharky.tail.audio.currentTime = 0;
+        this.world.sounds.playSound('sharky','tail','pause');
+        this.world.sounds.sharky.bubble.audio.currentTime = 0;
+        this.world.sounds.playSound('sharky','bubble','pause');   
     }
 
     /**
@@ -128,9 +121,8 @@ class Character extends CharacterImgSet{
     finAttack() {
         this.playAnimationOnes(this.IMAGES_ATTACK_FIN);         
         this.count++;
-        this.directionFinAttack();
-        this.tail_sound.play();
-        this.tail_sound.volume = 0.8;
+        this.directionFinAttack()
+        this.world.sounds.playSound('sharky','tail','play');
 
         if (this.count == this.IMAGES_ATTACK_FIN.length ) {                    
             this.world.keyboard.space = false;
@@ -155,9 +147,7 @@ class Character extends CharacterImgSet{
     bubbleTrap() {
         this.playAnimationOnes(this.IMAGES_BUBBLE_TRAP);         
         this.count++;
-        this.bubble_sound.play();
-        this.bubble_sound.playbackRate = 10;
-        this.bubble_sound.volume = 0.3;  
+        this.world.sounds.playSound('sharky','bubble','play');
 
         if (this.count == this.IMAGES_BUBBLE_TRAP.length ) {                    
             this.world.keyboard.d = false;

@@ -55,9 +55,6 @@ function InitLevel() {
             new Backgroundfloor('img/3. Background/Layers/2. Floor/D2.png', 720*5 ,0),    
         ],
         [
-            new Audio('audio/levelsound.mp3'),
-        ],
-        [
             new Coin(10,30),
             new Coin(150,70),
             new Coin(50,60),
