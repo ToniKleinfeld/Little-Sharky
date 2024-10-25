@@ -176,28 +176,44 @@ function exitFullscreen() {
     }
 }
 
-function showInfoContainer() {
-    
+/**
+ * Hide or show the Infocontainer
+ */
+function showInfoContainer() {    
     const start = document.getElementById('startgame');
     const infocontainer = document.getElementById('infocontainer');
 
-    start.classList.toggle('d-none');
-    infocontainer.classList.toggle('d-none')
-    toggleInfobutton(infocontainer)
-    
+    toggleAnimation(infocontainer);
+    toggleInfo(infocontainer,start);    
 }
 
 /**
- * toggle the icon in the info button
+ * 
+ * @param {*} infocontainer - dom path to infocontainer
+ */
+function toggleAnimation(infocontainer) {    
+    infocontainer.classList.toggle('slide-in-bottom');
+    infocontainer.classList.toggle('slide-out-bottom');    
+}
+
+/**
+ * toggle the icon in the info button , and the start / info container
  * 
  * @param {string} infos - dom path to infocontainer
+ * * @param {string} start - dom path to start button
  */
-function toggleInfobutton(infos) {
+function toggleInfo(infos,start) {
     const button = document.getElementById('infos');    
     
-    if (infos.classList[2] == 'd-none') {
+    if (!infos.classList.contains('d-none')) {
+        setTimeout(() => {
+            start.classList.toggle('d-none');
+            infos.classList.toggle('d-none');
+        }, 500);
         button.innerHTML = '?'
     } else {
+        start.classList.toggle('d-none');
+        infos.classList.toggle('d-none');
         button.innerHTML = 'x'
     }
 }
@@ -217,12 +233,22 @@ function hideContainer(path) {
     }
 }
 
+/**
+ * load wanted content für help section
+ * 
+ * @param {sring} keyword - keyword , to know wich content should be load
+ */
 function loadContent(keyword) {
     const content = document.getElementById('infocontent');
 
     content.innerHTML = contentHTML(keyword);
 }
 
+/**
+ * 
+ * @param {string} keyword -get keyword
+ * @returns html content for infos to play oder Impressum
+ */
 function contentHTML(keyword){
     switch (keyword) {
         case 'How to Play':
@@ -236,12 +262,12 @@ function contentHTML(keyword){
 
         case 'Impressum':
             return /*html*/`
-                test 2
-            `
-
-        case 'Privacy':
-            return /*html*/`
-                test 3
+                <P>Toni Kleinfeld</P>
+                <p>48161 Münster</p>
+                <p>Goldaper Str.19</p>
+                <br>
+                <a href="mailto:tonikleinfeld@aol.com">Send Mail</a>
+                <a href="tel:+01735451636">Call me</a>
             `
     
         default:
