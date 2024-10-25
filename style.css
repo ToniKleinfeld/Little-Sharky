@@ -239,8 +239,9 @@ h1 {
     width: 95%;
     height: 74%;
     margin-top: 2%;
-    font-size: 1.7vw;
+    font-size: 0.7em;
     overflow: auto;
+    justify-content: flex-start;
     flex-direction: column;
     text-align: center;
 
@@ -251,6 +252,7 @@ h1 {
     & p:hover {    
     color: aquamarine;
     opacity: 1;
+    zoom: 1.2;
     }
 
     & p{
@@ -272,7 +274,7 @@ h1 {
 .infoButton {
    border: 4px solid white;
    border-radius: 2em;
-   font-size: 1.5vh; 
+   font-size: 0.7em; 
    padding: 0.5%;
    width: 30%;
    text-align: center;
