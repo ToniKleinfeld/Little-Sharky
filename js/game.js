@@ -12,6 +12,7 @@ function init() {
     canvas = document.getElementById('canvas');
     world = new StartScreen(canvas,sounds,volumeStatus);
     addEventListenerFunctions(canvas);
+    hideContainer('mobilecontrolls');
 }
 
 /**
@@ -22,16 +23,6 @@ function init() {
 function addEventListenerFunctions(canvas) {
     canvas.addEventListener("click", function(){startSound();});
     canvas.addEventListener("touchstart",function(){startSound();});
-    document.addEventListener('keydown', function(){  
-        if (world instanceof StartScreen) {
-            startGame();
-        }
-    });
-    document.addEventListener('touchstart', function(){  
-        if (world instanceof StartScreen) {
-            startGame();
-        }
-    });
 }
 
 /**
@@ -42,6 +33,8 @@ function startGame() {
     canvas = document.getElementById('canvas');
     InitLevel(); // load level 1 <-- use later for start button when overlay designed
     world = new World(canvas, keyboard, sounds, volumeStatus);
+    hideContainer('mobilecontrolls');
+    hideContainer('startcontainer');
 }
 
 document.addEventListener('keydown', (e) => {   
@@ -180,5 +173,78 @@ function exitFullscreen() {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
+    }
+}
+
+function showInfoContainer() {
+    
+    const start = document.getElementById('startgame');
+    const infocontainer = document.getElementById('infocontainer');
+
+    start.classList.toggle('d-none');
+    infocontainer.classList.toggle('d-none')
+    toggleInfobutton(infocontainer)
+    
+}
+
+/**
+ * toggle the icon in the info button
+ * 
+ * @param {string} infos - dom path to infocontainer
+ */
+function toggleInfobutton(infos) {
+    const button = document.getElementById('infos');    
+    
+    if (infos.classList[2] == 'd-none') {
+        button.innerHTML = '?'
+    } else {
+        button.innerHTML = 'x'
+    }
+}
+
+/**
+ * Hide Div container , based on world instance
+ * 
+ * @param {string} path - id from div container
+ */
+function hideContainer(path) {
+    const controlls = document.getElementById(path);
+    
+    if (world instanceof StartScreen) {
+        controlls.classList.add('d-none');
+    } else if (world instanceof World) {
+        controlls.classList.toggle('d-none');
+    }
+}
+
+function loadContent(keyword) {
+    const content = document.getElementById('infocontent');
+
+    content.innerHTML = contentHTML(keyword);
+}
+
+function contentHTML(keyword){
+    switch (keyword) {
+        case 'How to Play':
+            return /*html*/`
+                <p>Fin attack is effective agains puffer fishes.</p>
+                <p>Bubble attack is good against jellys.</p>
+                <p>If you collectet poisen it is automticly used against the wale.</p>
+                <p>The wale only weakness are poisened bubbles.</p>
+                <p>Each level contains 10 coins.</p>
+            `
+
+        case 'Impressum':
+            return /*html*/`
+                test 2
+            `
+
+        case 'Privacy':
+            return /*html*/`
+                test 3
+            `
+    
+        default:
+            break;
     }
 }

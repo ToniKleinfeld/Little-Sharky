@@ -32,7 +32,7 @@
     <script src="./js/game.js"></script>
     
 </head>
-<body onload="init()">
+<body onload="init() , loadContent('How to Play')">
 <div class="background">
     <h1>Little Sharky</h1>
 
@@ -47,8 +47,27 @@
             <div class="nomute" id="mute" onclick="muteGame()"></div>
 
         </div>
+
+        <div class="start-container" id="startcontainer">
+
+            <div class="infoicon center" id="infos" onclick="showInfoContainer()">?</div>
+            <div class="startButton" id="startgame" onclick="startGame()"></div>
+
+        </div>
+
+        <div class="infocontainer center d-none" id="infocontainer">
+
+            <div class="content center" id="infocontent"></div>
+
+            <div class="infobar">
+                <div class="infoButton" onclick="loadContent('How to Play')">How to Play</div>
+                <div class="infoButton" onclick="loadContent('Impressum')">Impressum</div>
+                <div class="infoButton" onclick="loadContent('Privacy')">Privacy policy</div>
+            </div>
+
+        </div>
     
-        <div class="pannel d-none">
+        <div class="pannel" id="mobilecontrolls">
 
             <div class="pannel-wrapper left-pannel">
                 <button class="playBtn" id="leftButton">🡠</button>
