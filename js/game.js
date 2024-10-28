@@ -255,8 +255,8 @@ function contentHTML(keyword){
             return /*html*/`
                 <p>Fin attack is effective agains puffer fishes.</p>
                 <p>Bubble attack is good against jellys.</p>
-                <p>If you collectet poisen it is automticly used against the wale.</p>
                 <p>The wale only weakness are poisened bubbles.</p>
+                <p>If you collect poisen, it is automaticly used against the wale.</p>
                 <p>Each level contains 10 coins.</p>
             `
 
@@ -266,8 +266,8 @@ function contentHTML(keyword){
                 <span>48161 Münster</span>
                 <span>Goldaper Str.19</span>
                 <br>
-                <a href="mailto:tonikleinfeld@aol.com">Send Mail</a>
-                <a href="tel:+01735451636">Call me</a>
+                <a href="mailto:tonikleinfeld@aol.com">tonikleinfeld@aol.com</a>
+                <a href="tel:+01735451636">+01735451636</a>
             `
     
         default:

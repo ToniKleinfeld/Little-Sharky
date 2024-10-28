@@ -10,6 +10,7 @@ class World {
     poisonStatusBar = new PoisonStatusBar();
     throwableObject = [];
     sounds;
+    endscreen = [new Gamewin,new Gameend(true)]; 
 
     constructor(canvas, keyboard,sounds, volumeStatus) {
         this.ctx = canvas.getContext('2d');
@@ -57,10 +58,12 @@ class World {
         this.addObjectsToMap(this.level.coins); 
         this.addObjectsToMap(this.level.poisen); 
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObject);          
+        this.addObjectsToMap(this.throwableObject); 
+                 
 
         this.ctx.translate(-this.camera_x,0);
 
+        this.addObjectsToMap(this.endscreen); 
         this.addToMap(this.statusBar);
         this.addToMap(this.coinStatusBar);
         this.addToMap(this.poisonStatusBar);   
