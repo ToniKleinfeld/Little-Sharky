@@ -193,8 +193,6 @@ h1 {
     height: 63%;
     margin-right: 12%; 
     cursor: pointer;  
-    
-
 }
 
 .infoicon {
@@ -260,7 +258,6 @@ h1 {
     } 
 }
 
-
 .infobar {
     height: 22%;
     width: 96%;
@@ -307,6 +304,19 @@ a {
 
 a:hover {
     color: lightpink;
+}
+
+.message {
+    display: none;
+    text-align: center;
+
+    & h4 {
+        margin: 3%;
+        background: rgb(118,5,133);
+        background: linear-gradient(39deg, rgba(118,5,133,0.64) 21%, rgba(16,14,108,0.7973564425770308) 80%);
+        border-radius: 1em;
+        border: 4px solid white;
+    }
 }
 
  @-webkit-keyframes slide-in-bottom {
@@ -358,8 +368,6 @@ a:hover {
       opacity: 0;
     }
   }
-  
-  
 
 @media (max-height:619px) {
     h1 {
@@ -385,3 +393,12 @@ a:hover {
     }
  }
 
+ @media only screen and (orientation: portrait) {
+    .message {
+      display: unset;
+    }
+
+    .canvascontainer {
+        display: none;
+    }
+  }

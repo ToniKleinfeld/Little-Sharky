@@ -262,9 +262,9 @@ function contentHTML(keyword){
 
         case 'Impressum':
             return /*html*/`
-                <P>Toni Kleinfeld</P>
-                <p>48161 Münster</p>
-                <p>Goldaper Str.19</p>
+                <span>Toni Kleinfeld</span>
+                <span>48161 Münster</span>
+                <span>Goldaper Str.19</span>
                 <br>
                 <a href="mailto:tonikleinfeld@aol.com">Send Mail</a>
                 <a href="tel:+01735451636">Call me</a>
