@@ -13,9 +13,7 @@ canvas {
 
 .canvascontainer {
     position: relative;
-    display: block;
     border-radius: 20px; 
-    overflow: hidden;
     background-image: url(./img/assets/background.jpeg);
     background-position: 35% 0% ;
     background-size:cover;
@@ -23,8 +21,9 @@ canvas {
 }
 
 .fullscreencanvas {
-    height: 100dvh;
-    width: 100dvw;
+    height: calc(100dvh - 6px);
+    width: calc(100dvw - 6px);
+    border-radius: unset;
 }
 
 .center {
@@ -376,14 +375,30 @@ a:hover {
 }
 
 @media only screen and (max-width:720px) {
-    canvas {
+    canvas, .canvascontainer {
         width:calc(100% - 6px); 
     }
 }
 
 @media only screen and (max-height:480px) {
-    canvas {
+    canvas, .canvascontainer{
         height: calc(100dvh - 6px)
+    }
+
+    .canvascontainer:fullscreen .start-container{
+        bottom: 12%;
+    }
+}
+
+@media only screen and (max-width:450px) {
+    .canvascontainer:fullscreen .start-container{
+        bottom: 12%;
+    }
+}
+
+@media only screen and (min-width:2100px) {
+    .canvascontainer:fullscreen .start-container{
+        bottom: 12%;
     }
 }
 
