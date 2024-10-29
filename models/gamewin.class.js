@@ -10,5 +10,4 @@ class Gamewin extends MoveableObject {
         this.x = 0;
         this.y = 0;
     }
-
 }

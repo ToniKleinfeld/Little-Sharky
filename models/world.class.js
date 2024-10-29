@@ -10,7 +10,8 @@ class World {
     poisonStatusBar = new PoisonStatusBar();
     throwableObject = [];
     sounds;
-    endscreen = [new Gamewin,new Gameend(true)]; 
+    endscreen = [];
+    gameEnd = false;
 
     constructor(canvas, keyboard,sounds, volumeStatus) {
         this.ctx = canvas.getContext('2d');
@@ -20,7 +21,7 @@ class World {
         this.volumeStatus = volumeStatus;
         this.draw();
         this.setWorld();
-        this.run();
+        this.run(); 
     };
 
     /**
@@ -39,7 +40,8 @@ class World {
             this.checkCollisionsTrowableObjects();
             this.checkCollisionsForItems('Coin');
             this.checkCollisionsForItems('Poisenbottle');
-            this.playBackgroundMusic();        
+            this.playBackgroundMusic();
+            this.checkWinLooseConditions()   
         },100 / 60);
     }
 
@@ -288,5 +290,34 @@ class World {
      */
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
-      }
+    }
+
+    /**
+     * When char is dead , push Gameend(false) for gameover , When Endboss is dead push Gamewin and Gameend(true) for win in endscreen
+     */
+    checkWinLooseConditions() {
+      if (this.character.isDead() && !this.gameEnd) {
+        setTimeout(() => {
+            this.endscreen.push(new Gameend(false));
+        }, 2000);
+          this.gameEnd = true;
+      } else if (this.level.enemies[this.filterEnemiesForBossId()].isDead() && !this.character.isDead() && !this.gameEnd) {
+        setTimeout(() => {
+            this.endscreen.push(new Gamewin(),new Gameend(true));
+            this.keyboard = '';
+        }, 2000);
+          this.gameEnd = true;          
+      }      
+    }
+
+    /**
+     * Get the id number of Enboss class 
+     * 
+     * @returns number of position from Enboss class in enemies Array
+     */
+    filterEnemiesForBossId() {
+        let id;
+        this.level.enemies.forEach((object,index) => { if (object instanceof Endboss) {id = index}});
+        return id
+    }
 }
