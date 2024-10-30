@@ -134,13 +134,14 @@ class Enemy extends MoveableObject {
                 this.loadImage(this.enemytype.IMAGES_DEATH[1]);
             } else if (!this.contactToCharacter && !this.checkTimeInBlowUp() && !this.isDead()) {
                 this.playAnimation(this.enemytype.IMAGES_SWIM);
+                this.resetHeightAndWitdth();
             } else if(this.checkTimeInBlowUp() && !this.isDead()){
                 this.playAnimation(this.enemytype.IMAGES_BLOW_SWIM);
             } else {
                 this.collideWithCharacter()
             }                       
-        }, 150);  
-
+        }, 150);
+        
         /**
          * intervall for change the position of enemy
          */
@@ -158,11 +159,26 @@ class Enemy extends MoveableObject {
     }
 
     /**
+     * set the height an width to orginal value when blow up is ended
+     */
+    resetHeightAndWitdth(){
+            if (this.height > 80) {
+                this.height -= 8;
+            }
+
+            if (this.width > 90) {
+                this.width -= 8;
+            }
+    }
+
+    /**
      * Play animation for blowup , when the enemie get contact with the Character.
      */
     collideWithCharacter() {
         this.playAnimationOnes(this.enemytype.IMAGES_BLOW_UP);
         this.count++;
+        this.width += 8;
+        this.height += 8;
 
         if (this.count == this.enemytype.IMAGES_BLOW_UP.length) { 
             this.count = 0;
