@@ -5,6 +5,13 @@ class Enemy extends MoveableObject {
     currentImage = 0;
     count = 0;
     timeInBlowUp;
+
+    offset = {
+        top:5,
+        left:5,
+        right:5,
+        bottom:20,
+    };
     
     
     type1 = {
@@ -162,12 +169,10 @@ class Enemy extends MoveableObject {
      * set the height an width to orginal value when blow up is ended
      */
     resetHeightAndWitdth(){
-            if (this.height > 80) {
+            if (this.height > 80|| this.width > 90 ) {
                 this.height -= 8;
-            }
-
-            if (this.width > 90) {
                 this.width -= 8;
+                this.offset.bottom = 20;
             }
     }
 
@@ -179,6 +184,7 @@ class Enemy extends MoveableObject {
         this.count++;
         this.width += 8;
         this.height += 8;
+        this.offset.bottom = 0;
 
         if (this.count == this.enemytype.IMAGES_BLOW_UP.length) { 
             this.count = 0;
