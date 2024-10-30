@@ -4,6 +4,8 @@ class EnemyTwo extends MoveableObject {
     width = 90;
     currentImage = 0;
     count = 0;
+    baseY;
+    directionUpDown;
     
     type1 = {
         START_IMAGE : 'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
@@ -81,9 +83,10 @@ class EnemyTwo extends MoveableObject {
         this.loadImages(this.enemytype.IMAGES_DEATH);
 
         this.x = 300 + Math.random() * 500;
-        this.y = Math.random() * 405;
+        this.y = Math.random() * 340;
+        this.baseY = this.y;
         this.speed = 0.15 + Math.random() * 0.25;
-        
+        this.directionUpDown = Math.random() < 0.5;       
         
         this.animate();  
     }
@@ -109,8 +112,35 @@ class EnemyTwo extends MoveableObject {
         this.setStoppableInterval(() => {
             if (!this.isDead()) {
                 this.swimLeft();
+                this.setDirectionUpDown()
+                this.swimUpandDown()
             }       
-        }, 1000 / 60); 
+        }, 1000 / 30); 
+    }
+
+    /**
+     * let the enemy swim top or down
+     */
+    swimUpandDown() {     
+        if (this.directionUpDown) {
+            this.y += 1;
+        } else if (!this.directionUpDown) {
+            this.y -= 1; 
+        }        
+    }
+
+    /**
+     * set the direction if the enemy swim top or down
+     */
+    setDirectionUpDown() {
+        let topmax = this.baseY +64;
+        let downmax = this.baseY -64;      
+ 
+        if ( topmax <= this.y) {
+            this.directionUpDown = false;              
+        } else if ( downmax >= this.y ) {
+            this.directionUpDown = true;     
+        } 
     }
 
     /**

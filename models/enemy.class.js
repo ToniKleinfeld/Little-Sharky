@@ -169,7 +169,7 @@ class Enemy extends MoveableObject {
      * set the height an width to orginal value when blow up is ended
      */
     resetHeightAndWitdth(){
-            if (this.height > 80|| this.width > 90 ) {
+            if (this.height > 80 || this.width > 90 ) {
                 this.height -= 8;
                 this.width -= 8;
                 this.offset.bottom = 20;
