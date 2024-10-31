@@ -21,7 +21,7 @@ class Character extends CharacterImgSet{
         super()
         this.x = 10;
         this.y = 200;
-        this.speed = this.speed * 80;
+        this.speed = this.speed * 50;
         this.animate();
     }
 

@@ -112,16 +112,15 @@ class Enemy extends MoveableObject {
     
     enemytype;    
 
-    constructor(type) {        
+    constructor(type,x) {        
         super().loadImage(this.setEnemyStartType(type).START_IMAGE);        
         this.loadImages(this.enemytype.IMAGES_SWIM);
         this.loadImages(this.enemytype.IMAGES_BLOW_UP);
         this.loadImages(this.enemytype.IMAGES_BLOW_SWIM);
 
-        this.x = 300 + Math.random() * 500;
+        this.x = x + Math.random() * 500;
         this.y = Math.random() * 405;
-        this.speed = 0.15 + Math.random() * 0.25;
-        
+        this.speed = 0.25 + Math.random() * 0.25;        
         
         this.animate();  
     }

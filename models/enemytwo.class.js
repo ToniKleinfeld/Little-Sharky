@@ -77,15 +77,15 @@ class EnemyTwo extends MoveableObject {
     
     enemytype;    
 
-    constructor(type) {        
+    constructor(type,x) {        
         super().loadImage(this.setEnemyStartType(type).START_IMAGE);        
         this.loadImages(this.enemytype.IMAGES_SWIM);
         this.loadImages(this.enemytype.IMAGES_DEATH);
 
-        this.x = 300 + Math.random() * 500;
+        this.x = x + Math.random() * 500;
         this.y = Math.random() * 340;
         this.baseY = this.y;
-        this.speed = 0.15 + Math.random() * 0.25;
+        this.speed = 0.25 + Math.random() * 0.25;
         this.directionUpDown = Math.random() < 0.5;       
         
         this.animate();  
@@ -123,9 +123,9 @@ class EnemyTwo extends MoveableObject {
      */
     swimUpandDown() {     
         if (this.directionUpDown) {
-            this.y += 1;
+            this.y += this.speed ;
         } else if (!this.directionUpDown) {
-            this.y -= 1; 
+            this.y -= this.speed ; 
         }        
     }
 

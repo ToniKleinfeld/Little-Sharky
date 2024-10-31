@@ -253,10 +253,14 @@ function contentHTML(keyword){
     switch (keyword) {
         case 'How to Play':
             return /*html*/`
-                <p>Fin attack is effective agains puffer fishes.</p>
-                <p>Bubble attack is good against jellys.</p>
+                <p>Fin attack is effective agains Pufferfishes.</p>
+                <p>Bubble attack is good against Jellys.
+                But be carefull , when it hit a Pufferfish.
+                </p>
                 <p>The wale only weakness are poisened bubbles.</p>
-                <p>If you collect poisen, it is automaticly used against the wale.</p>
+                <p>There is a chance that the Boss drop poisen,
+                when he get hit by a normal bubble</p>
+                <p>Poisen is automaticly used against the wale.</p>
                 <p>Each level contains 10 coins.</p>
             `
 

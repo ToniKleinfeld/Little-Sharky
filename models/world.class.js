@@ -163,9 +163,27 @@ class World {
         if (bubble.bubbleTyp.typ == 'poisen' && !enemy.isHurt()) {
             enemy.hit();
             bubble.deleteTrowableobject();
-            console.log(enemy.energy)
         } else {           
             bubble.deleteTrowableobject();
+            if (Math.random() < 0.25) {
+                this.level.poisen.push(new Poisenbottle(this.randomPoisenDrop(true),this.randomPoisenDrop(false)))
+            }            
+        }
+    }
+
+    /**
+     * return random x or y codination near boss
+     * 
+     * @param {boolean} value - true for x , false for y cordinates
+     * @returns x or y codinates for bottle position
+     */
+    randomPoisenDrop(value) {
+        if (value) {
+            let x = 3600 + Math.random() * 400;
+            return x 
+        } else if (!value) {
+            let y = Math.random() * 400;
+            return y
         }
     }
 
@@ -223,6 +241,7 @@ class World {
         } else if (this.character.energy > 0 && this.keyboard.d && this.character.x > 3150 && this.poisonStatusBar.precentage > 0) {
             let bubble = new ThrowableObjects(this.character.x, this.character.y, this.character.otherDirection ,'poisen');
             this.throwableObject.push(bubble);
+            this.poisonStatusBar.precentage -= 10;
         }
     }
 
