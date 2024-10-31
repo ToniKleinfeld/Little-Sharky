@@ -18,6 +18,7 @@ canvas {
     background-position: 35% 0% ;
     background-size:cover;
     background-repeat: no-repeat;
+    overflow: hidden;
 }
 
 .fullscreencanvas {
