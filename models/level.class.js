@@ -1,4 +1,4 @@
-class darklevel {
+class level {
     enemies;
     backgroundObjects;
     light;
