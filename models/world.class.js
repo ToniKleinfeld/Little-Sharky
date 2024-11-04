@@ -318,12 +318,14 @@ class World {
       if (this.character.isDead() && !this.gameEnd) {
         setTimeout(() => {
             this.endscreen.push(new Gameend(false));
+            document.getElementById('retry').classList.toggle('d-none');
         }, 2000);
           this.gameEnd = true;
       } else if (this.level.enemies[this.filterEnemiesForBossId()].isDead() && !this.character.isDead() && !this.gameEnd) {
         setTimeout(() => {
             this.endscreen.push(new Gamewin(),new Gameend(true));
             this.keyboard = '';
+            document.getElementById('retry').classList.toggle('d-none');
         }, 2000);
           this.gameEnd = true;          
       }      

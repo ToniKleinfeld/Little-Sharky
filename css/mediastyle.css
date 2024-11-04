@@ -1,0 +1,102 @@
+@-webkit-keyframes slide-in-bottom {
+    0% {
+      -webkit-transform: translateY(1000px);
+              transform: translateY(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-bottom {
+    0% {
+      -webkit-transform: translateY(1000px);
+              transform: translateY(1000px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+@-webkit-keyframes slide-out-bottom {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateY(1000px);
+              transform: translateY(1000px);
+      opacity: 0;
+    }
+  }
+  @keyframes slide-out-bottom {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: translateY(1000px);
+              transform: translateY(1000px);
+      opacity: 0;
+    }
+  }
+
+@media (max-height:619px) {
+    h1 {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:720px) {
+    canvas, .canvascontainer {
+        width:100%; 
+    }
+
+}
+
+@media only screen and (max-height:480px) {
+    canvas, .canvascontainer{
+        height: 100dvh;
+        border-radius: unset;
+        border: unset;
+    }
+
+    .canvascontainer:fullscreen, .start-container{
+        bottom: 12%;
+    }
+}
+
+@media only screen and (max-width:450px) {
+    .canvascontainer:fullscreen, .start-container{
+        bottom: 12%;
+    }
+}
+
+@media only screen and (min-width:2100px) {
+    .canvascontainer:fullscreen .start-container{
+        bottom: 12%;
+    }
+}
+
+@media (hover: none) { 
+    .pannel {
+        display: flex;
+    }
+ }
+
+ @media only screen and (orientation: portrait) {
+    .message {
+      display: unset;
+    }
+
+    .canvascontainer { 
+        display: none;
+    }
+  }

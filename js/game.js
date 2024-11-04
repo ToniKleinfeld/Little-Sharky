@@ -29,12 +29,23 @@ function addEventListenerFunctions(canvas) {
  * Start the game , change the world from startscreen to world
  */
 function startGame() {
+    toggleRetryStartContainers()
     stopMusic();
     canvas = document.getElementById('canvas');
     InitLevel(); // load level 1 <-- use later for start button when overlay designed
-    world = new World(canvas, keyboard, sounds, volumeStatus);
-    hideContainer('mobilecontrolls');
-    hideContainer('startcontainer');
+    world = new World(canvas, keyboard, sounds, volumeStatus);    
+}
+
+/**
+ * toogle the startcontainer with display none or the retry container
+ */
+function toggleRetryStartContainers() {
+    if (world instanceof StartScreen) {
+        hideContainer('mobilecontrolls');
+        hideContainer('startcontainer');
+    } else if (world instanceof World) {
+        document.getElementById('retry').classList.toggle('d-none');
+    } 
 }
 
 document.addEventListener('keydown', (e) => {   
