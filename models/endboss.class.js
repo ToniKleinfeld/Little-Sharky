@@ -2,7 +2,9 @@ class Endboss extends MoveableObject {
 
     height = 220;
     width = 250;
-    count = 0;    
+    count = 0;
+    attackTimer;
+    directionLeftRight = true;
 
     type1 = {
         IMAGES_FLOATING : [
@@ -104,9 +106,26 @@ class Endboss extends MoveableObject {
             } else if (this.firstContact) {
                 this.playAnimation(this.enemytype.IMAGES_FLOATING); 
             }
-            
         this.spawnAnimation++
-        }, 150);   
+        }, 150);
+
+        this.setStoppableInterval(() => {
+            this.attack()
+        }, 1000/30)
+
+    }
+
+    
+    attack() {
+        if (this.firstContact) {
+            this.collidewithChar();
+            if (this.x > 3500) {
+                this.x -= 66;                
+            }
+            if (this.y < 270) {
+                this.y += 45;
+            }
+        }
     }
 
     /**
