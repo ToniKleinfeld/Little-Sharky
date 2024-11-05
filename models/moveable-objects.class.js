@@ -154,4 +154,19 @@ class MoveableObject extends DrawableObject{
     stopIntervall(id) {        
          clearInterval(id) 
     }
+
+    /**
+     * Check the time , how long the enemy is dead 
+     * 
+     * @returns boorlean - true or false
+     */
+    checkTimeAfterDeath() {
+        let timepassed = new Date().getTime() - this.deathTimeStamp; 
+        timepassed = timepassed / 1000; 
+        if (timepassed > 3) {
+            return true
+        } else {
+            return false
+        }
+    }
 }

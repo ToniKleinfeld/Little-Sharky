@@ -41,7 +41,8 @@ class World {
             this.checkCollisionsForItems('Coin');
             this.checkCollisionsForItems('Poisenbottle');
             this.playBackgroundMusic();
-            this.checkWinLooseConditions()   
+            this.checkWinLooseConditions();
+            this.checkDeathTime(); 
         },100 / 60);
     }
 
@@ -342,5 +343,16 @@ class World {
         let id;
         this.level.enemies.forEach((object,index) => { if (object instanceof Endboss) {id = index}});
         return id
+    }
+
+    /**
+     * Delete each enemy , which is longer than 3 sec death
+     */
+    checkDeathTime() {
+        this.level.enemies.forEach((enemy,index) => {
+            if (enemy.checkTimeAfterDeath()) {
+                this.level.enemies.splice(index,1);
+            }
+        });
     }
 }
