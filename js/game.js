@@ -32,7 +32,7 @@ function startGame() {
     toggleRetryStartContainers()
     stopMusic();
     canvas = document.getElementById('canvas');
-    InitLevel(); // load level 1 <-- use later for start button when overlay designed
+    InitLevel();
     world = new World(canvas, keyboard, sounds, volumeStatus);    
 }
 

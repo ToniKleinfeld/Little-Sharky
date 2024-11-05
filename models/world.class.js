@@ -84,8 +84,9 @@ class World {
             if ( this.character.isColliding(enemy) && (!this.keyboard.space || enemy instanceof EnemyTwo || enemy instanceof Endboss) && enemy.energy > 0 && !this.character.isDead()) {
                 this.getHitedByEnemy(enemy);
                 this.character.selectHitAnimation(enemy);             
-            } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy)) {
-                enemy.energy = 0;  
+            } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy) && enemy.energy > 0) {
+                enemy.energy = 0;
+                enemy.deathTimeStamp = new Date().getTime();
             } 
          })
     }
@@ -195,6 +196,7 @@ class World {
      */
     bubbleHitJelly(enemy,bubble) {
         enemy.energy = 0;
+        enemy.deathTimeStamp = new Date().getTime();
         setTimeout(() => {
             bubble.deleteTrowableobject();
         }, 30)
