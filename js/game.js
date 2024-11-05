@@ -238,7 +238,7 @@ function hideContainer(path) {
     const controlls = document.getElementById(path);
     
     if (world instanceof StartScreen) {
-        controlls.classList.add('d-none');
+        controlls.classList.toggle('d-none');
     } else if (world instanceof World) {
         controlls.classList.toggle('d-none');
     }
