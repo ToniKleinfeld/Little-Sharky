@@ -3,8 +3,8 @@ class Endboss extends MoveableObject {
     height = 220;
     width = 250;
     count = 0;
-    attackTimer;
-    directionLeftRight = true;
+    attackArea = 2;
+    attackcycle = true;
 
     type1 = {
         IMAGES_FLOATING : [
@@ -96,35 +96,143 @@ class Endboss extends MoveableObject {
         this.setStoppableInterval(() => {
            this.firstContactBoss();
             if (this.spawnAnimation < 10) {
-                this.playAnimation(this.enemytype.IMAGES_SPAWN)            
+                this.playAnimation(this.enemytype.IMAGES_SPAWN);
+                if (this.spawnAnimation == 9) {
+                    this.attackcycle = false;
+                }
             } else if (this.isDead()) {
                 this.die();
             } else if (this.isHurt()) {
                 this.getHit();
-            }else if (this.contactToCharacter) {
-                this.collidewithChar()
+            }else if (this.contactToCharacter && this.attackcycle) {
+                this.collidewithChar();
+            } else if (!this.attackcycle) {
+                this.attack() 
             } else if (this.firstContact) {
                 this.playAnimation(this.enemytype.IMAGES_FLOATING); 
             }
-        this.spawnAnimation++
+        this.spawnAnimation++;
         }, 150);
 
         this.setStoppableInterval(() => {
-            this.attack()
-        }, 1000/30)
-
+            this.randomDirectionAttack();
+        }, 3500);
     }
 
+    /**
+     * roll a nummber  between 0-3 for attackArea, if it is already in use , it call the function again
+     */
+    randomDirectionAttack() {
+       let newArea = Math.floor(Math.random() * 4);
+       if (this.attackArea == newArea) {
+        this.randomDirectionAttack();        
+       } else {        
+        this.attackArea = newArea;
+        this.attackcycle = !this.firstContact ? this.attackcycle : false;
+       }       
+    }
     
+    /**
+     * Start the attack prosess
+     */
     attack() {
-        if (this.firstContact) {
-            this.collidewithChar();
-            if (this.x > 3500) {
-                this.x -= 66;                
-            }
-            if (this.y < 270) {
-                this.y += 45;
-            }
+        let x;
+        let y;
+        this.collidewithChar();
+        this.chooseAttackArea(x,y);     
+    }
+
+    /**
+     * if else which attack area is aktive
+     * 
+     * @param {boolean} x 
+     * @param {boolean} y 
+     */
+    chooseAttackArea(x,y) {
+        if (this.attackArea == 0) {
+            x = this.leftAttackArea();
+            y = this.topAttackArea();
+        } else if (this.attackArea == 1) {                
+            x = this.leftAttackArea();
+            y = this.bottomAttackArea();
+        } else if (this.attackArea == 2) {           
+            x = this.rightAttackArea();
+            y = this.topAttackArea();
+        } else if (this.attackArea == 3) {
+            x = this.rightAttackArea();
+            y = this.bottomAttackArea();
+        }
+        this.endAttack(x,y);
+    }
+
+    /**
+     * 
+     * @returns boolean true , when reached x cordinates
+     */
+    leftAttackArea() {
+        if (this.x > 3500) {
+            this.x -= 66;                
+        }  else {
+            return true;
+        }        
+    }
+
+    /**
+     * 
+     * @returns boolean true , when reached x cordinates
+     */
+    rightAttackArea() {
+        if (this.x < 3900) {
+            this.x += 66;                
+        } else {
+            return true;
+        }
+    }
+    /**
+     * 
+     * @returns boolean true , when reached y cordinates
+     */
+    bottomAttackArea(){
+        if (this.y < 270) {
+            this.y += 45;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * 
+     * @returns boolean true , when reached y cordinates
+     */
+    topAttackArea() {
+        if (this.y > 0) {
+            this.y -= 45;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * end the attackcycle when reached the wanted x/y cordinates
+     * 
+     * @param {boolean} x 
+     * @param {boolean} y 
+     */
+    endAttack(x,y) {        
+        if (x && y) {
+            this.attackcycle = true;
+            this.setDirection();
+        }
+    }
+
+    /**
+     * Set the wal direction after attack depending on attackarea
+     */
+    setDirection() {
+        if (this.attackArea == 0 || this.attackArea == 1) {
+            this.otherDirection = true;
+        } else {
+            this.otherDirection = false;
         }
     }
 
@@ -154,11 +262,22 @@ class Endboss extends MoveableObject {
      * play the hit animation
      */
     getHit(){
+        this.checkIfAttackInProgress();
         this.playAnimationOnes(this.enemytype.IMAGES_HIT)
         this.count++
 
         if (this.count == this.enemytype.IMAGES_HIT.length) {
                 this.count = 0;  
+        }
+    }
+
+    /**
+     * If the attack is in progress , it stop and reset the count to 0
+     */
+    checkIfAttackInProgress() {
+        if (!this.attackcycle) {
+            this.count = 0
+            this.attackcycle = true;
         }
     }
 

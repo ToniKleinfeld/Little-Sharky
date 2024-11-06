@@ -123,7 +123,7 @@ class Character extends CharacterImgSet{
             }    
             this.bubbleTrap();           
         } else {
-            this.resetAndPauseSounds()
+            this.resetAndPauseSounds();
         }
     }
 
