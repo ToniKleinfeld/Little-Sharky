@@ -208,7 +208,12 @@ h1 {
     background-repeat: no-repeat;
     width: 35%;
     height: 100%;    
-    cursor: pointer;  
+    cursor: pointer;
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .chooseLevel { 
