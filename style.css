@@ -150,13 +150,16 @@ h1 {
     padding-right: 2%;
 }
 
-.fullscreen, .smallscreen, .nomute, .mute{
+.fullscreen, .smallscreen, .nomute, .mute, .returnStart{
     height: 40%;
     aspect-ratio: 1/1;
     padding: 0.5%;
     background-color: transparent;
-    border-radius: 50%;
     cursor: pointer;
+
+    &:hover {
+        height: 45%
+    }
 }
 .smallscreen {
     content: url(/img/assets/minimize.png);
@@ -164,6 +167,10 @@ h1 {
 
 .fullscreen {
     content: url(/img/assets/fullscreen.png);
+}
+
+.returnStart {
+    content: url(/img/assets/home.svg);
 }
 
 .nomute {

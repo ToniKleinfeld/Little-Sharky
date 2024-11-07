@@ -130,7 +130,6 @@ class Endboss extends MoveableObject {
     setAttackTimer() {
         let timepassed = new Date().getTime() - this.attackTimer; //ms
         timepassed = (timepassed / 1000); //sec
-        console.log(timepassed)
         return timepassed > 2;
     }
 

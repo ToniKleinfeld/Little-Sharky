@@ -37,12 +37,23 @@ function startGame() {
 }
 
 /**
+ * Return to the loading Screen
+ */
+function loadStartScreen() {
+    init();
+    clearAllIntervals();
+    hideContainer('startcontainer');
+    hideContainer('returnStart');
+}
+
+/**
  * toogle the startcontainer with display none or the retry container
  */
 function toggleRetryStartContainers() {
     if (world instanceof StartScreen) {
         hideContainer('mobilecontrolls');
         hideContainer('startcontainer');
+        hideContainer('returnStart');
     } else if (world instanceof World) {
         clearAllIntervals();
         document.getElementById('retry').classList.toggle('d-none');
