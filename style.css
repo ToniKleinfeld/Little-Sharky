@@ -162,23 +162,23 @@ h1 {
     }
 }
 .smallscreen {
-    content: url(/img/assets/minimize.png);
+    content: url(img/assets/minimize.png);
 }
 
 .fullscreen {
-    content: url(/img/assets/fullscreen.png);
+    content: url(img/assets/fullscreen.png);
 }
 
 .returnStart {
-    content: url(/img/assets/home.svg);
+    content: url(img/assets/home.svg);
 }
 
 .nomute {
-    content: url(/img/assets/soundon.png);
+    content: url(img/assets/soundon.png);
 }
 
 .mute {
-    content: url(/img/assets/soundmute.png);
+    content: url(img/assets/soundmute.png);
 }
 
 .start-container {
@@ -203,7 +203,7 @@ h1 {
 }
 
 .startButton {
-    background-image: url(/img/6.Botones/Start/1.png);
+    background-image: url(./img/6.Botones/Start/1.png);
     background-size:contain;
     background-repeat: no-repeat;
     width: 35%;
@@ -360,7 +360,7 @@ a:hover {
 }
 
 .retryButton {
-    background: url('/img/6.Botones/Try again/Recurso 16.png') no-repeat;
+    background: url('./img/6.Botones/Try again/Recurso 16.png') no-repeat;
     background-size: contain;
     width: 32%;
     height: 63%;
