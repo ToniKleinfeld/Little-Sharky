@@ -11,10 +11,10 @@ class Character extends CharacterImgSet{
     world;
 
     offset = {
-        top:70,
-        left:30,
-        right:30,
-        bottom:30
+        top:85,
+        left:45,
+        right:45,
+        bottom:45
     };    
 
     constructor() {

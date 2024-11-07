@@ -5,6 +5,7 @@ class Endboss extends MoveableObject {
     count = 0;
     attackArea = 2;
     attackcycle = true;
+    attackTimer = new Date().getTime();
 
     type1 = {
         IMAGES_FLOATING : [
@@ -64,10 +65,10 @@ class Endboss extends MoveableObject {
     enemytype = this.type1;
     
     offset = {
-        top:90,
-        left:15,
-        right:20,
-        bottom:40
+        top:100,
+        left:20,
+        right:25,
+        bottom:45
     };
     
     constructor() {
@@ -115,8 +116,22 @@ class Endboss extends MoveableObject {
         }, 150);
 
         this.setStoppableInterval(() => {
-            this.randomDirectionAttack();
-        }, 3500);
+            if (this.setAttackTimer() && !this.isDead()) {
+                this.randomDirectionAttack();
+            };        
+        }, 150);
+    }
+
+    /**
+     * Check if there is a delay of 3 seconds between attack or hit
+     * 
+     * @returns true or false
+     */
+    setAttackTimer() {
+        let timepassed = new Date().getTime() - this.attackTimer; //ms
+        timepassed = (timepassed / 1000); //sec
+        console.log(timepassed)
+        return timepassed > 2;
     }
 
     /**
@@ -129,6 +144,7 @@ class Endboss extends MoveableObject {
        } else {        
         this.attackArea = newArea;
         this.attackcycle = !this.firstContact ? this.attackcycle : false;
+        this.attackTimer = new Date().getTime();
        }       
     }
     
@@ -240,6 +256,7 @@ class Endboss extends MoveableObject {
      * play the death animation
      */
     die() {
+        this.checkIfAttackInProgress();
         this.playAnimationOnes(this.enemytype.IMAGES_DEAD)
         this.count++
 
@@ -276,6 +293,7 @@ class Endboss extends MoveableObject {
      */
     checkIfAttackInProgress() {
         if (!this.attackcycle) {
+            this.attackTimer = new Date().getTime() - 800;
             this.count = 0
             this.attackcycle = true;
         }

@@ -44,8 +44,13 @@ function toggleRetryStartContainers() {
         hideContainer('mobilecontrolls');
         hideContainer('startcontainer');
     } else if (world instanceof World) {
+        clearAllIntervals();
         document.getElementById('retry').classList.toggle('d-none');
     } 
+}
+
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 document.addEventListener('keydown', (e) => {   
