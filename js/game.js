@@ -41,13 +41,21 @@ function startGame() {
  * Return to the loading Screen
  */
 function loadStartScreen() {
-    if (world instanceof World) {
-        document.getElementById('retry').classList.toggle('d-none');
-    }
+    toggleRetryWhenGoStart()
     init();
     clearAllIntervals();
     hideContainer('startcontainer');
     hideContainer('returnStart');
+}
+
+/**
+ * Check if the retry container have display none class , when not toggle it
+ */
+function toggleRetryWhenGoStart() {
+    let retry = document.getElementById('retry');
+    if (!retry.classList.contains('d-none')) {
+        retry.classList.toggle('d-none');
+    }
 }
 
 /**

@@ -44,6 +44,11 @@ class Sounds{
                 setvolume : 0.6,
                 playbackspeed : 1,
             },
+            snore : {
+                audio : new Audio('audio/snore.mp3'),
+                setvolume : 0.5,
+                playbackspeed : 3,
+            }
         }
         
         this.backgroundmusic = {
@@ -75,6 +80,11 @@ class Sounds{
                 setvolume : 0,
                 playbackspeed : 1,
             },
+            snore : {
+                audio : new Audio('audio/snore.mp3'),
+                setvolume : 0,
+                playbackspeed : 1,
+            }
         }
 
         this.backgroundmusic = {

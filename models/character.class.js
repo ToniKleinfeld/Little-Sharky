@@ -133,13 +133,15 @@ class Character extends CharacterImgSet{
     idleAnimationIfElse() {
         if (this.count == 0 && this.energy > 0 && this.checkIfAnyKeyPressed()) {
             this.swimAnimation();
+            this.world.sounds.playSound('sharky','snore','pause');
         } else if(!this.isDead() && Date.now() - this.timeCount <= 5000){
             this.idleAnimation(this.IMAGES_IDLE)
         } else if(!this.isDead() && Date.now() - this.timeCount <= 7250) {
             this.idleAnimation(this.IMAGES_LONG_IDLE)
         } else if(!this.isDead()) {
             this.idleAnimation(this.IMAGES_LONG_IDLELOOP)
-        }
+            this.world.sounds.playSound('sharky','snore','play');
+        }        
     }
 
     /**

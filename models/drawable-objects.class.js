@@ -40,39 +40,39 @@ class DrawableObject {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         } catch (e) {
             console.warn('Error loading image', e);
-            console.log('Could not load Image',)
+            console.log('Could not load Image')
         }
     }  
 
-    /**
-     * draw a Framebox on the Char, enemy and Enboss , get later deleted
-     * 
-     * @param {string} ctx - value for add images to the canvas
-     */
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof EnemyTwo || this instanceof Coin) { 
-        ctx.beginPath();
-        ctx.lineWidth = '5';
-        ctx.strokeStyle = 'blue';
-        ctx.rect(this.x, this.y, this.width ,this.height);
-        ctx.stroke();
-        }
-    }
+    // /**
+    //  * draw a Framebox on the Char, enemy and Enboss , get later deleted
+    //  * 
+    //  * @param {string} ctx - value for add images to the canvas
+    //  */
+    // drawFrame(ctx) {
+    //     if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof EnemyTwo || this instanceof Coin) { 
+    //     ctx.beginPath();
+    //     ctx.lineWidth = '5';
+    //     ctx.strokeStyle = 'blue';
+    //     ctx.rect(this.x, this.y, this.width ,this.height);
+    //     ctx.stroke();
+    //     }
+    // }
 
-    /**
-     * draw a a smaller Framebox on the Char, enemy and Enboss for hit , get later deleted
-     * 
-     * @param {string} ctx - value for add images to the canvas
-     */
-    drawHitframe(ctx) {
-        if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof ThrowableObjects || this instanceof EnemyTwo) { 
-            ctx.beginPath();
-            ctx.lineWidth = '4';
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.x + this.offset.left, this.y + this.offset.top , this.width - this.offset.right - this.offset.left, this.height - this.offset.bottom - this.offset.top);
-            ctx.stroke();
-            }
-    }
+    // /**
+    //  * draw a a smaller Framebox on the Char, enemy and Enboss for hit , get later deleted
+    //  * 
+    //  * @param {string} ctx - value for add images to the canvas
+    //  */
+    // drawHitframe(ctx) {
+    //     if (this instanceof Character || this instanceof Enemy || this instanceof Endboss || this instanceof ThrowableObjects || this instanceof EnemyTwo) { 
+    //         ctx.beginPath();
+    //         ctx.lineWidth = '4';
+    //         ctx.strokeStyle = 'red';
+    //         ctx.rect(this.x + this.offset.left, this.y + this.offset.top , this.width - this.offset.right - this.offset.left, this.height - this.offset.bottom - this.offset.top);
+    //         ctx.stroke();
+    //         }
+    // }
 
     /**
      * Check if precentage go above 100 , reset on 100 when yes
