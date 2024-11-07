@@ -360,7 +360,8 @@ a:hover {
 }
 
 .retryButton {
-    background: url('./img/6.Botones/Try again/Recurso 16.png') no-repeat;
+    background-image: url(img/assets/retry.png);
+    background-repeat: no-repeat;
     background-size: contain;
     width: 32%;
     height: 63%;
