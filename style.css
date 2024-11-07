@@ -158,7 +158,7 @@ h1 {
     cursor: pointer;
 
     &:hover {
-        height: 45%
+        height: 50%
     }
 }
 .smallscreen {
@@ -192,14 +192,42 @@ h1 {
     right: 0;    
 }
 
+.startButtoncontainer {
+    width: 82%;
+    height: 55%;
+    gap: 3%;
+    justify-content: flex-end;
+    margin-right: 5%;
+    display: flex;
+    align-items: flex-start;
+}
+
 .startButton {
     background-image: url(/img/6.Botones/Start/1.png);
     background-size:contain;
     background-repeat: no-repeat;
-    width: 32%;
-    height: 63%;
-    margin-right: 12%; 
+    width: 35%;
+    height: 100%;    
     cursor: pointer;  
+}
+
+.chooseLevel { 
+    padding: 0 3% 0 3%;
+    -webkit-text-stroke: 0px white;
+    border: 4px solid white;
+    border-radius: 20% ; 
+    font-size: 0.8em;
+    cursor: pointer;
+    height: calc(100% - 8px);
+    
+}
+
+.easy {
+    background-color: sandybrown;
+}
+
+.hard {
+    background-color: rgb(95, 18, 105);
 }
 
 .infoicon {

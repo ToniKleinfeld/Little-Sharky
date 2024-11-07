@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let sounds = new Sounds();
 let volumeStatus = 'on';
 let fullscreen = false;
+let chooseLevel = false;
 
 /**
  * load, the startscreen , when dom is loaded
@@ -40,6 +41,9 @@ function startGame() {
  * Return to the loading Screen
  */
 function loadStartScreen() {
+    if (world instanceof World) {
+        document.getElementById('retry').classList.toggle('d-none');
+    }
     init();
     clearAllIntervals();
     hideContainer('startcontainer');
@@ -62,6 +66,21 @@ function toggleRetryStartContainers() {
 
 function clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+/**
+ * swtich level mode button and string
+ */
+function toggleLevel() {
+    let mode = document.getElementById('chooseLevel');
+    if (!chooseLevel) {
+        mode.innerHTML = 'Hard'
+    } else {
+        mode.innerHTML = 'Easy'
+    }
+    mode.classList.toggle('easy');
+    mode.classList.toggle('hard');
+    chooseLevel = chooseLevel ?!chooseLevel : true;
 }
 
 document.addEventListener('keydown', (e) => {   

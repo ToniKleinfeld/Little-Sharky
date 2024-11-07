@@ -58,9 +58,14 @@
 
         <div class="start-container" id="startcontainer">
 
-            <div class="infoicon center" id="infos" onclick="showInfoContainer()">?</div>
-            <div class="startButton" id="startgame" onclick="startGame()"></div>
-
+            <div class="infoicon center" id="infos" onclick="showInfoContainer()" title="Want to know more?">?</div>
+            <div class="startButtoncontainer center" id="startgame">
+                <div class="chooseLevel center easy" onclick="toggleLevel()" title="Press me to swich Easy and Hard level." id="chooseLevel">
+                    Easy
+                </div>
+                <div class="startButton" onclick="startGame()" title="Start the Game!">
+                </div>
+            </div>
         </div>
 
         <div class="infocontainer center slide-out-bottom d-none " id="infocontainer">
@@ -68,8 +73,8 @@
             <div class="content center" id="infocontent"></div>
 
             <div class="infobar">
-                <div class="infoButton" onclick="loadContent('How to Play')">How to Play</div>
-                <div class="infoButton" onclick="loadContent('Impressum')">Impressum</div>
+                <div class="infoButton" onclick="loadContent('How to Play')" title="Show tipps for the Game.">How to Play</div>
+                <div class="infoButton" onclick="loadContent('Impressum')" title="Swich to Impressum">Impressum</div>
             </div>
 
         </div>

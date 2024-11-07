@@ -71,6 +71,10 @@
     .canvascontainer:fullscreen, .start-container{
         bottom: 12%;
     }
+
+    .startButtoncontainer {
+      margin-top: 5%;
+    }
 }
 
 @media only screen and (max-width:450px) {
