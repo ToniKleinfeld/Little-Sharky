@@ -44,6 +44,15 @@ class DrawableObject {
         }
     }  
 
+    /**
+     * Check if precentage go above 100 , reset on 100 when yes
+     */
+    checkCurrentPrecentageMax() {
+        if(this.precentage > 100) {
+            this.precentage = 100
+        }
+    }
+    // This code followed is for future working, displaying the hitboxes!
     // /**
     //  * draw a Framebox on the Char, enemy and Enboss , get later deleted
     //  * 
@@ -73,13 +82,4 @@ class DrawableObject {
     //         ctx.stroke();
     //         }
     // }
-
-    /**
-     * Check if precentage go above 100 , reset on 100 when yes
-     */
-    checkCurrentPrecentageMax() {
-        if(this.precentage > 100) {
-            this.precentage = 100
-        }
-    }
 }

@@ -95,27 +95,29 @@ class EnemyTwo extends MoveableObject {
      *repead calls the if stated to check for changes for current Animations and sounds     
      */
     animate() {
-        /**
-         * intervall to check which animation should be shown in cancas 
-         */
-        this.setStoppableInterval(() => {                         
-            if(this.isDead()){
-                this.trapedInBubble()
-            } else {
-                this.playAnimation(this.enemytype.IMAGES_SWIM);
-            }                       
-        }, 150);  
+        this.setStoppableInterval(() => {this.playDisplayedAnimations();}, 150);  
+        this.setStoppableInterval(() => {this.changePositionsOfEnemy();}, 1000 / 30); 
+    }
+    /**
+    * intervall for change the position of enemy
+    */
+    changePositionsOfEnemy() {
+        if (!this.isDead()) {
+            this.swimLeft();
+            this.setDirectionUpDown()
+            this.swimUpandDown()
+        } 
+    }
 
-        /**
-         * intervall for change the position of enemy
-         */
-        this.setStoppableInterval(() => {
-            if (!this.isDead()) {
-                this.swimLeft();
-                this.setDirectionUpDown()
-                this.swimUpandDown()
-            }       
-        }, 1000 / 30); 
+    /**
+    * check which animation should be shown in cancas 
+    */
+    playDisplayedAnimations() {
+        if(this.isDead()){
+            this.trapedInBubble()
+        } else {
+            this.playAnimation(this.enemytype.IMAGES_SWIM);
+        }   
     }
 
     /**

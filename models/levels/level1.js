@@ -1,5 +1,8 @@
 let level1;
 
+/**
+ * set the choosen level when the game starts false = easy / true = hard
+ */
 function InitLevel() {
     if (!chooseLevel) {
         setEasyLevel()
@@ -8,6 +11,9 @@ function InitLevel() {
     }    
 }
 
+/**
+ * set the level to hard (more enemy dark background theme)
+ */
 function setHardLevel() {
     level1 = new level(
         [
@@ -103,6 +109,9 @@ function setHardLevel() {
     )
 }
 
+/**
+ * set the level to easy (less enemy light background theme)
+ */
 function setEasyLevel() {
     level1 = new level(
         [

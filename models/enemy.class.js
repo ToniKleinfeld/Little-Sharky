@@ -129,39 +129,42 @@ class Enemy extends MoveableObject {
      *repead calls the if stated to check for changes for current Animations and sounds     
      */
     animate() {
-        /**
-         * intervall to check which animation should be shown in cancas 
-         */
-        this.setStoppableInterval(() => {                         
-            if (this.checkTimeInBlowUp() && this.isDead()) {
-                this.loadImage(this.enemytype.IMAGES_DEATH[0]);
-                this.timeInBlowUp = new Date().getTime();
-            }  else if(this.isDead()){
-                this.loadImage(this.enemytype.IMAGES_DEATH[1]);
-            } else if (!this.contactToCharacter && !this.checkTimeInBlowUp() && !this.isDead()) {
-                this.playAnimation(this.enemytype.IMAGES_SWIM);
-                this.resetHeightAndWitdth();
-            } else if(this.checkTimeInBlowUp() && !this.isDead()){
-                this.playAnimation(this.enemytype.IMAGES_BLOW_SWIM);
-            } else {
-                this.collideWithCharacter()
-            }                       
-        }, 150);
-        
-        /**
-         * intervall for change the position of enemy
-         */
-        this.setStoppableInterval(() => {
-            if (!this.contactToCharacter && !this.isDead()) {
-                this.swimLeft();
-            } else if (this.checkTimeInBlowUp() && this.isDead()){
-                this.x -= 20
-                this.y -=30
-            } else if(this.isDead() && this.y <= 410) {
-                this.x -= 20
-                this.y +=30
-            }      
-        }, 1000 / 60); 
+        this.setStoppableInterval(() => {this.enemyAnimations();}, 150);
+        this.setStoppableInterval(() => {this.enemyDeathAnimations();}, 1000 / 60); 
+    }
+
+    /**
+     * check which condition are true , to choose the played animation
+     */
+    enemyDeathAnimations() {
+        if (!this.contactToCharacter && !this.isDead()) {
+            this.swimLeft();
+        } else if (this.checkTimeInBlowUp() && this.isDead()){
+            this.x -= 20
+            this.y -=30
+        } else if(this.isDead() && this.y <= 410) {
+            this.x -= 20
+            this.y +=30
+        }  
+    }
+
+    /**
+     * check which condition are true , to choose the played animation
+     */
+    enemyAnimations() {
+        if (this.checkTimeInBlowUp() && this.isDead()) {
+            this.loadImage(this.enemytype.IMAGES_DEATH[0]);
+            this.timeInBlowUp = new Date().getTime();
+        }  else if(this.isDead()){
+            this.loadImage(this.enemytype.IMAGES_DEATH[1]);
+        } else if (!this.contactToCharacter && !this.checkTimeInBlowUp() && !this.isDead()) {
+            this.playAnimation(this.enemytype.IMAGES_SWIM);
+            this.resetHeightAndWitdth();
+        } else if(this.checkTimeInBlowUp() && !this.isDead()){
+            this.playAnimation(this.enemytype.IMAGES_BLOW_SWIM);
+        } else {
+            this.collideWithCharacter()
+        }  
     }
 
     /**

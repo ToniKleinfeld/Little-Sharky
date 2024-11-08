@@ -90,31 +90,8 @@ class Endboss extends MoveableObject {
     /**
      *repead calls the if stated to check for changes for current Animations and sounds     
      */
-    animate() {
-        /**
-         * this intervall check which animation should be displayed
-         */
-        this.setStoppableInterval(() => {
-           this.firstContactBoss();
-            if (this.spawnAnimation < 10) {
-                this.playAnimation(this.enemytype.IMAGES_SPAWN);
-                if (this.spawnAnimation == 9) {
-                    this.attackcycle = false;
-                }
-            } else if (this.isDead()) {
-                this.die();
-            } else if (this.isHurt()) {
-                this.getHit();
-            }else if (this.contactToCharacter && this.attackcycle) {
-                this.collidewithChar();
-            } else if (!this.attackcycle) {
-                this.attack() 
-            } else if (this.firstContact) {
-                this.playAnimation(this.enemytype.IMAGES_FLOATING); 
-            }
-        this.spawnAnimation++;
-        }, 150);
-
+    animate() {        
+        this.setStoppableInterval(() => {this.firstContactBoss();this.bossAnimations();this.spawnAnimation++;}, 150);
         this.setStoppableInterval(() => {
             if (this.setAttackTimer() && !this.isDead()) {
                 this.randomDirectionAttack();
@@ -131,6 +108,28 @@ class Endboss extends MoveableObject {
         let timepassed = new Date().getTime() - this.attackTimer; //ms
         timepassed = (timepassed / 1000); //sec
         return timepassed > 2;
+    }
+
+    /**
+    *  function check which animation should be displayed
+    */
+    bossAnimations() {
+        if (this.spawnAnimation < 10) {
+            this.playAnimation(this.enemytype.IMAGES_SPAWN);
+            if (this.spawnAnimation == 9) {
+                this.attackcycle = false;
+            }
+        } else if (this.isDead()) {
+            this.die();
+        } else if (this.isHurt()) {
+            this.getHit();
+        }else if (this.contactToCharacter && this.attackcycle) {
+            this.collidewithChar();
+        } else if (!this.attackcycle) {
+            this.attack() 
+        } else if (this.firstContact) {
+            this.playAnimation(this.enemytype.IMAGES_FLOATING); 
+        }
     }
 
     /**

@@ -29,22 +29,8 @@ class Character extends CharacterImgSet{
      *repead calls the if stated to check for changes for current Animations and sounds
      */
     animate() {
-        /**
-         * Play sound for swim or stop them when dead
-         * calls the swim function so move the char when an arrow key is pressed
-         */
         this.setStoppableInterval(() => {this.moveCharacter();  this.moveCamera();}, 1000 / 60);
-
-        /**
-         * Check if the Char is dead and play the animation one time 
-         * if key for find attack or Bubble attack is pressed and play this animations/sounds and creat a bubble object in world trowable array one time 
-         * if no if matched it calls the function to stop and reset the sounds for find/Bubble attack
-         */
         this.setStoppableInterval(() => this.characterAttacks(), 60);
-
-        /**
-         * Check which animation should be shown , when press any key or when no key pressed when the idle animation starts and repeat when char is not dead
-         */
         this.setStoppableInterval(() =>  this.idleAnimationIfElse(), 250);            
     }
 
@@ -55,13 +41,9 @@ class Character extends CharacterImgSet{
         if (this.isDead()) {
             this.world.sounds.playSound('sharky','swim','pause');
         } else if (this.canSwimRight()) {
-           this.swimRight();
-           this.otherDirection = false;
-           this.world.sounds.playSound('sharky','swim','play');
+            this.swimmingRight();
         } else if (this.canSwimLeft()) {
-           this.swimLeft();
-           this.otherDirection = true;
-           this.world.sounds.playSound('sharky','swim','play');
+            this.swimmingLeft();
         } else if (this.canSwimTop()) {
             this.swimTop(); 
             this.world.sounds.playSound('sharky','swim','play');
@@ -70,6 +52,37 @@ class Character extends CharacterImgSet{
             this.world.sounds.playSound('sharky','swim','play');
         } else {
             this.world.sounds.playSound('sharky','swim','pause');
+        }
+    }
+
+    /**
+     * calls function to swim left
+     */
+    swimmingLeft() {
+        this.swimLeft();
+        this.otherDirection = true;
+        this.moveCharacterAlsoUpDown()
+        this.world.sounds.playSound('sharky','swim','play');
+    }
+
+    /**
+     * calls function to swim right
+     */
+    swimmingRight() {
+        this.swimRight();
+        this.otherDirection = false;
+        this.moveCharacterAlsoUpDown()
+        this.world.sounds.playSound('sharky','swim','play');
+    }
+
+    /**
+     * check if also key for up or down is pressed and call the functions to swim up down , when swim left or right
+     */
+    moveCharacterAlsoUpDown() {
+        if (this.canSwimTop()) {
+            this.swimTop(); 
+        } else if (this.canSwimDown()) {
+            this.swimDown();
         }
     }
 
