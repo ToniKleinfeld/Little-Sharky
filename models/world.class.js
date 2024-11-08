@@ -32,21 +32,6 @@ class World {
     }
 
     /**
-     * intervall to caLL collision function , and backgroundmusic
-     */
-    run() {
-        this.character.setStoppableInterval(() => {            
-            this.checkCollisions();
-            this.checkCollisionsTrowableObjects();
-            this.checkCollisionsForItems('Coin');
-            this.checkCollisionsForItems('Poisenbottle');
-            this.playBackgroundMusic();
-            this.checkWinLooseConditions();
-            this.checkDeathTime(); 
-        },100 / 60);
-    }
-
-    /**
      * Function to add all object to canvas , when game starts
      */
     draw() {
@@ -61,9 +46,8 @@ class World {
         this.addObjectsToMap(this.level.coins); 
         this.addObjectsToMap(this.level.poisen); 
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObject); 
-                 
-
+        this.addObjectsToMap(this.throwableObject);
+        
         this.ctx.translate(-this.camera_x,0);
 
         this.addObjectsToMap(this.endscreen); 
@@ -76,6 +60,22 @@ class World {
             self.draw();
         });      
     }
+
+    /**
+     * intervall to caLL collision function , and backgroundmusic
+     */
+        run() {
+            this.character.setStoppableInterval(() => {            
+                this.checkCollisions();
+                this.checkCollisionsTrowableObjects();
+                this.checkCollisionsForItems('Coin');
+                this.checkCollisionsForItems('Poisenbottle');
+                this.playBackgroundMusic();
+                this.checkWinLooseConditions();
+                this.checkDeathTime(); 
+            },100 / 60);
+        }
+    
 
     /**
      * check for every object in array enemies , if it collide with the character and call following function when yes
