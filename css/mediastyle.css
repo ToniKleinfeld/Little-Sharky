@@ -69,12 +69,20 @@
     }
 
     .canvascontainer:fullscreen, .start-container{
-        bottom: 12%;
+        bottom: 5%;
     }
 
     .startButtoncontainer {
       margin-top: 5%;
     }
+}
+
+@media only screen and (max-height:389px) {
+
+  .canvascontainer:fullscreen, .start-container{
+      bottom: 10%;
+  }
+
 }
 
 @media only screen and (max-width:450px) {
@@ -92,6 +100,12 @@
 @media (hover: none) { 
     .pannel {
         display: flex;
+    }
+
+    @media (max-height:600px) {
+      .fullscreen {
+        display: none !important;
+      }
     }
  }
 

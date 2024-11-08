@@ -236,9 +236,11 @@ function exitFullscreen() {
 function showInfoContainer() {    
     const start = document.getElementById('startgame');
     const infocontainer = document.getElementById('infocontainer');
+    const button = document.getElementById('infos');    
+    const impressumButton = document.getElementById('impressumButton');    
 
     toggleAnimation(infocontainer);
-    toggleInfo(infocontainer,start);    
+    toggleInfo(infocontainer,start,button,impressumButton);    
 }
 
 /**
@@ -251,24 +253,26 @@ function toggleAnimation(infocontainer) {
 }
 
 /**
- * toggle the icon in the info button , and the start / info container
+ * toggle the icon in the info button , and the start / info container , impressum button
  * 
  * @param {string} infos - dom path to infocontainer
- * * @param {string} start - dom path to start button
+ *  @param {string} start - dom path to start button
+ *  @param {string} button - dom path to infobutton
+ *  @param {string} impressumButton - dom path to impressumButton
  */
-function toggleInfo(infos,start) {
-    const button = document.getElementById('infos');    
-    
+function toggleInfo(infos,start,button,impressumButton) {
     if (!infos.classList.contains('d-none')) {
         setTimeout(() => {
             start.classList.toggle('d-none');
             infos.classList.toggle('d-none');
         }, 500);
-        button.innerHTML = '?'
+        button.innerHTML = '?';
+        impressumButton.innerHTML = 'Impressum';
     } else {
         start.classList.toggle('d-none');
         infos.classList.toggle('d-none');
         button.innerHTML = 'x'
+        impressumButton.innerHTML = 'Close';
     }
 }
 
@@ -290,45 +294,11 @@ function hideContainer(path) {
 /**
  * load wanted content für help section
  * 
- * @param {sring} keyword - keyword , to know wich content should be load
+ * @param {string} keyword - keyword , to know wich content should be load
  */
 function loadContent(keyword) {
-    const content = document.getElementById('infocontent');
+    const content = document.getElementById('infocontainer');
 
     content.innerHTML = contentHTML(keyword);
 }
 
-/**
- * 
- * @param {string} keyword -get keyword
- * @returns html content for infos to play oder Impressum
- */
-function contentHTML(keyword){
-    switch (keyword) {
-        case 'How to Play':
-            return /*html*/`
-                <p>Fin attack is effective agains Pufferfishes.</p>
-                <p>Bubble attack is good against Jellys.
-                But be carefull , when it hit a Pufferfish.
-                </p>
-                <p>The wale only weakness are poisened bubbles.</p>
-                <p>There is a chance that the Boss drop poisen,
-                when he get hit by a normal bubble</p>
-                <p>Poisen is automaticly used against the wale.</p>
-                <p>Each level contains 10 coins.</p>
-            `
-
-        case 'Impressum':
-            return /*html*/`
-                <span>Toni Kleinfeld</span>
-                <span>48161 Münster</span>
-                <span>Goldaper Str.19</span>
-                <br>
-                <a href="mailto:tonikleinfeld@aol.com">tonikleinfeld@aol.com</a>
-                <a href="tel:+01735451636">+01735451636</a>
-            `
-    
-        default:
-            break;
-    }
-}

@@ -137,7 +137,7 @@ h1 {
     display: none !important;
 }
 
-.fullscreen-mute-buttons-container {
+.icons-container {
     display: flex;
     position: absolute;
     top: 0;
@@ -145,22 +145,38 @@ h1 {
     right: 0;
     height: 10%;
     justify-content: flex-end;
-    align-items: center;
-    gap: 2%;
-    padding-right: 2%;
-}
+    align-items: center; 
+       
+    & div {
+        padding: 0 3% 0 1%;
+        display: inherit;
+        align-items: center;
+        cursor: pointer; 
+        height: 60%;
+        aspect-ratio: 1/1;
+        background-color: transparent;
+    }
 
-.fullscreen, .smallscreen, .nomute, .mute, .returnStart{
-    height: 40%;
-    aspect-ratio: 1/1;
-    padding: 0.5%;
-    background-color: transparent;
-    cursor: pointer;
+    & .icons-right {   
+        gap: 12px;
+    }
 
-    &:hover {
-        height: 50%
+    & .impressum {
+        padding: 0 1%;
+        border: 3px solid white;
+        background: rgb(118,5,133);
+        background: linear-gradient(39deg, rgba(118,5,133,0.64) 21%, rgba(16,14,108,0.7973564425770308) 80%);
+        border-radius: 1em;
+        font-size: 0.5em;
+        -webkit-text-stroke: 0 transparent;
+        letter-spacing: 1px;
+
+        &:hover{
+            zoom: 1.1;
+        }
     }
 }
+
 .smallscreen {
     content: url(img/assets/minimize.png);
 }
@@ -276,8 +292,8 @@ h1 {
 .content {
     width: 95%;
     height: 74%;
-    margin-top: 2%;
-    font-size: 0.7em;
+    margin-bottom: 2%;
+    font-size: 0.8em;
     overflow: auto;
     justify-content: flex-start;
     flex-direction: column;
@@ -290,7 +306,6 @@ h1 {
     & p:hover {    
     color: aquamarine;
     opacity: 1;
-    zoom: 1.2;
     }
 
     & p{
@@ -315,7 +330,6 @@ h1 {
    padding: 0.5%;
    width: 30%;
    text-align: center;
-   cursor: pointer;
 }
 
 ::-webkit-scrollbar {

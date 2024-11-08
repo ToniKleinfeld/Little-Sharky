@@ -7,9 +7,9 @@ class StartScreen{
     
     pics = [
         new Startscreenpics('img/3. Background/Mesa de trabajo 1.png', -15, 0, 850, 480),
-        new Startscreenpics('img/6.Botones/Key/arrow keys.png', 30, 20 , 110 , 70),
+        new Startscreenpics('img/6.Botones/Key/arrow keys.png', 40, 35 , 95 , 55),
         new Startscreenpics('img/6.Botones/Key/D key.png', 270, 40 , 38 , 38),
-        new Startscreenpics('img/6.Botones/Key/Space Bar key.png', 450, 40 , 140 , 30),
+        new Startscreenpics('img/6.Botones/Key/Space Bar key.png', 450, 50 , 140 , 30),
     ];
 
     constructor(canvas,sounds,volumeStatus){
@@ -87,11 +87,11 @@ class StartScreen{
         this.ctx.fillStyle = 'white';
 
         this.ctx.strokeText('Move Sharky',15,110);
-        this.ctx.strokeText('Fin Attack',465,95);
+        this.ctx.strokeText('Fin Attack',465,105);
         this.ctx.strokeText('Bubble Attack',220,100);
 
         this.ctx.fillText('Move Sharky',15,110);
-        this.ctx.fillText('Fin Attack',465,95);
+        this.ctx.fillText('Fin Attack',465,105);
         this.ctx.fillText('Bubble Attack',220,100);
     }
 }
