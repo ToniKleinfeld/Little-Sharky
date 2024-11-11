@@ -269,7 +269,8 @@ class Endboss extends MoveableObject {
     firstContactBoss() { 
         if (world.character.x > 3200 && !this.firstContact) {
             this.firstContact = true; 
-            this.spawnAnimation = 0;                        
+            this.spawnAnimation = 0;
+            world.bossEnergyBar.push(new BossEnergy())                  
         }   
     } 
 
@@ -302,7 +303,7 @@ class Endboss extends MoveableObject {
      * 
      */
     hit() {
-        this.energy -= 25;
+        this.energy -= 20;
         if (this.energy < 0) {
             this.energy = 0;
         } else {

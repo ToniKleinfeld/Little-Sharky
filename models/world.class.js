@@ -12,6 +12,7 @@ class World {
     sounds;
     endscreen = [];
     gameEnd = false;
+    bossEnergyBar = [];
 
     constructor(canvas, keyboard,sounds, volumeStatus) {
         this.ctx = canvas.getContext('2d');
@@ -46,6 +47,7 @@ class World {
         this.addObjectsToMap(this.level.coins); 
         this.addObjectsToMap(this.level.poisen); 
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.bossEnergyBar);  
         this.addObjectsToMap(this.throwableObject);
         
         this.ctx.translate(-this.camera_x,0);
@@ -53,7 +55,8 @@ class World {
         this.addObjectsToMap(this.endscreen); 
         this.addToMap(this.statusBar);
         this.addToMap(this.coinStatusBar);
-        this.addToMap(this.poisonStatusBar);   
+        this.addToMap(this.poisonStatusBar);
+        
 
         let self = this;
         requestAnimationFrame(function() {
