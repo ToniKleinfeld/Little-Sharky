@@ -50,6 +50,29 @@ class Sounds{
                 playbackspeed : 3,
             }
         }
+
+        this.hit =  {
+            fish : {
+                audio : new Audio('audio/hitfish.mp3'),
+                setvolume : 1,
+                playbackspeed : 1,
+            },
+            jelly : {
+                audio : new Audio('audio/hitjelly.mp3'),
+                setvolume : 1,
+                playbackspeed : 1,
+            },
+            pufferfish : {
+                audio : new Audio('audio/defeatpuffer.mp3'),
+                setvolume : 1,
+                playbackspeed : 1,
+            },
+            bubble : {
+                audio : new Audio('audio/bubbleexplode.mp3'),
+                setvolume : 1,
+                playbackspeed : 1,
+            }
+        }
         
         this.backgroundmusic = {
             dark : {
@@ -82,6 +105,29 @@ class Sounds{
             },
             snore : {
                 audio : new Audio('audio/snore.mp3'),
+                setvolume : 0,
+                playbackspeed : 1,
+            }
+        }
+
+        this.hit =  {
+            fish : {
+                audio : new Audio('audio/hitfish.mp3'),
+                setvolume : 0,
+                playbackspeed : 1,
+            },
+            jelly : {
+                audio : new Audio('audio/hitjelly.mp3'),
+                setvolume : 0,
+                playbackspeed : 1,
+            },
+            pufferfish : {
+                audio : new Audio('audio/defeatpuffer.mp3'),
+                setvolume : 0,
+                playbackspeed : 1,
+            },
+            bubble : {
+                audio : new Audio('audio/bubbleexplode.mp3'),
                 setvolume : 0,
                 playbackspeed : 1,
             }

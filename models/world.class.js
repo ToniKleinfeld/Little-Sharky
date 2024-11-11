@@ -84,10 +84,12 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if ( this.character.isColliding(enemy) && (!this.keyboard.space || enemy instanceof EnemyTwo || enemy instanceof Endboss) && enemy.energy > 0 && !this.character.isDead()) {
                 this.getHitedByEnemy(enemy);
-                this.character.selectHitAnimation(enemy);             
+                this.character.selectHitAnimation(enemy);
+                this.sounds.playSound('hit','fish','play');           
             } else if (this.keyboard.space && !this.character.isDead() && enemy instanceof Enemy && this.character.isColliding(enemy) && enemy.energy > 0) {
                 enemy.energy = 0;
                 enemy.deathTimeStamp = new Date().getTime();
+                this.sounds.playSound('hit','pufferfish','play');
             } 
          })
     }
@@ -143,16 +145,28 @@ class World {
         if(this.throwableObject.length != 0) {
             this.throwableObject.forEach((bubble) => {
                 this.level.enemies.forEach((enemy) => {
-                    if (bubble.isColliding(enemy) && enemy instanceof EnemyTwo && enemy.energy > 0) {
-                        this.bubbleHitJelly(enemy,bubble);
-                    } else if (bubble.isColliding(enemy) && enemy instanceof Enemy && enemy.energy > 0) {
-                        this.bubbleHitPufferFish(enemy,bubble);
-                    } else if(bubble.isColliding(enemy) && enemy instanceof Endboss && enemy.energy > 0){
-                        this.bubbleHitEndboss(enemy,bubble);
-                    };
+                    this.bubbleHitsEnemie(enemy,bubble);
                 });
             });
         }
+    }
+
+    /**
+     * set function what happen when a bubble colide with a enemy
+     * 
+     * @param {string} enemy - current enemy
+     * @param {string} bubble - current bubble
+     */
+    bubbleHitsEnemie(enemy,bubble) {
+        if (bubble.isColliding(enemy) && enemy instanceof EnemyTwo && enemy.energy > 0) {
+            this.bubbleHitJelly(enemy,bubble);
+            this.sounds.playSound('hit','jelly','play');
+        } else if (bubble.isColliding(enemy) && enemy instanceof Enemy && enemy.energy > 0) {
+            this.bubbleHitPufferFish(enemy,bubble);
+        } else if(bubble.isColliding(enemy) && enemy instanceof Endboss && enemy.energy > 0){
+            this.bubbleHitEndboss(enemy,bubble);
+            this.sounds.playSound('hit','fish','play');
+        };
     }
 
     /**

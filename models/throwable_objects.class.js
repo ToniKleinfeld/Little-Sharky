@@ -70,7 +70,8 @@ class ThrowableObjects extends MoveableObject {
      */
     checkMovedDistance() {
         if (this.startX + 400 == this.x || this.startX - 400 == this.x) {  
-         this.deleteTrowableobject()                     
+         this.deleteTrowableobject()
+         world.sounds.playSound('hit','bubble','play');                     
         }
     }
 
@@ -79,7 +80,7 @@ class ThrowableObjects extends MoveableObject {
      */
     deleteTrowableobject() {
         this.stopIntervall(this.intervalIds[0])
-        world.throwableObject.splice(0,1);     
+        world.throwableObject.splice(0,1);    
     }
 
     /**
