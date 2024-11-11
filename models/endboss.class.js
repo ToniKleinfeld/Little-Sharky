@@ -3,6 +3,7 @@ class Endboss extends MoveableObject {
     height = 220;
     width = 250;
     count = 0;
+    contactCount = 0;
     attackArea = 2;
     attackcycle = true;
     attackTimer = new Date().getTime();
@@ -123,10 +124,10 @@ class Endboss extends MoveableObject {
             this.die();
         } else if (this.isHurt()) {
             this.getHit();
-        }else if (this.contactToCharacter && this.attackcycle) {
-            this.collidewithChar();
         } else if (!this.attackcycle) {
             this.attack() 
+        } else if (this.contactToCharacter && this.attackcycle) {
+            this.collidewithChar();
         } else if (this.firstContact) {
             this.playAnimation(this.enemytype.IMAGES_FLOATING); 
         }
@@ -290,12 +291,12 @@ class Endboss extends MoveableObject {
     /**
      * If the attack is in progress , it stop and reset the count to 0
      */
-    checkIfAttackInProgress() {
-        if (!this.attackcycle) {
-            this.attackTimer = new Date().getTime() - 800;
-            this.count = 0
-            this.attackcycle = true;
+    checkIfAttackInProgress() {  
+        if (!this.attackcycle) {            
+            this.count = 0;            
         }
+        this.attackTimer = new Date().getTime() - 800;
+        this.attackcycle = true;
     }
 
     /**
@@ -316,10 +317,10 @@ class Endboss extends MoveableObject {
      */
     collidewithChar(){
         this.playAnimationOnes(this.enemytype.IMAGES_ATTACK)
-        this.count++
+        this.contactCount++
     
-        if (this.count == this.enemytype.IMAGES_ATTACK.length) {
-                this.count = 0; 
+        if (this.contactCount == this.enemytype.IMAGES_ATTACK.length) {
+                this.contactCount = 0; 
                 this.contactToCharacter = false;                 
         }
     }

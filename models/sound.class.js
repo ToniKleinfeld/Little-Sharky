@@ -64,8 +64,8 @@ class Sounds{
             },
             pufferfish : {
                 audio : new Audio('audio/defeatpuffer.mp3'),
-                setvolume : 1,
-                playbackspeed : 1,
+                setvolume : 0.2,
+                playbackspeed : 2,
             },
             bubble : {
                 audio : new Audio('audio/bubbleexplode.mp3'),

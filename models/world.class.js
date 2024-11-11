@@ -47,15 +47,15 @@ class World {
         this.addObjectsToMap(this.level.coins); 
         this.addObjectsToMap(this.level.poisen); 
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.bossEnergyBar);  
         this.addObjectsToMap(this.throwableObject);
+        this.addObjectsToMap(this.bossEnergyBar);  
         
         this.ctx.translate(-this.camera_x,0);
-
-        this.addObjectsToMap(this.endscreen); 
+        
         this.addToMap(this.statusBar);
         this.addToMap(this.coinStatusBar);
         this.addToMap(this.poisonStatusBar);
+        this.addObjectsToMap(this.endscreen); 
         
 
         let self = this;

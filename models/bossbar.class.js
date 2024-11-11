@@ -43,7 +43,6 @@ class BossEnergy extends MoveableObject{
      */
     checkLife() {
         const currentLife = world.level.enemies[world.filterEnemiesForBossId()].energy;
-        console.log(world.level.enemies[world.filterEnemiesForBossId()].energy)
         this.setPrecentage(currentLife);
     }
 
