@@ -40,8 +40,9 @@ function contentHTML(keyword){
                 <span>48161 Münster</span>
                 <span>Goldaper Str.19</span>
                 <br>
-                <a href="mailto:tonikleinfeld@aol.com">tonikleinfeld@aol.com</a>
-                <a href="tel:+01735451636">+01735451636</a>
+                <a href="mailto:contact@toni-kleinfeld.de">contact@toni-kleinfeld.de</a>
+                <span>Ich selbst bin für den Inhalt verantwortlich.</span>
+                <span>Dies ist eine private Website, die ausschließlich zu nicht kommerziellen Zwecken betrieben wird.</span>
                 </div>
             `
     
